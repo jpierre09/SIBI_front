@@ -6,6 +6,7 @@ import {
   Link 
 } from 'react-router-dom';
 import { Income } from './pages/Income';
+import { Outflows } from './pages/Outflows';
 import Home from './pages/Home';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     <Routes>
       <Route path="/income" element={<Income />} />
       <Route path='/' element={<Home />} />
+      <Route path='/egresos' element={<Outflows />} />
     </Routes>
   );
 }
