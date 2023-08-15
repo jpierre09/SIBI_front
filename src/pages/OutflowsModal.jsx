@@ -84,34 +84,38 @@ const OutflowsModal = ({ open, onClose }) => {
               />
             </Box>
 
-            {/* Campo de Dependencia */}
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel>Dependencia</InputLabel>
-              <Select
-                value={dependencia}
-                onChange={(e) => setDependencia(e.target.value)}
-                label="Dependencia"
-              >
-                <MenuItem value={"mantenimiento"}>Mantenimiento</MenuItem>
-                <MenuItem value={"telemetria"}>Telemetría</MenuItem>
-                <MenuItem value={"hidrologia"}>Hidrología</MenuItem>
-                <MenuItem value={"No aplica"}>No aplica</MenuItem>
-              </Select>
-            </FormControl>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
 
-            {/* Campo de Red de monitoreo */}
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel>Red de monitoreo</InputLabel>
-              <Select
-                value={redMonitoreo}
-                onChange={(e) => setRedMonitoreo(e.target.value)}
-                label="Red de monitoreo"
-              >
-                <MenuItem value={"pluviometriaca"}>Pluviometriaca</MenuItem>
-                <MenuItem value={"nivel"}>Nivel</MenuItem>
-                <MenuItem value={"camaras"}>Cámaras</MenuItem>
-              </Select>
-            </FormControl>
+  {/* Campo de Dependencia */}
+  <FormControl fullWidth variant="outlined" margin="normal" sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}>
+    <InputLabel>Dependencia</InputLabel>
+    <Select
+      value={dependencia}
+      onChange={(e) => setDependencia(e.target.value)}
+      label="Dependencia"
+    >
+      <MenuItem value={"mantenimiento"}>Mantenimiento</MenuItem>
+      <MenuItem value={"telemetria"}>Telemetría</MenuItem>
+      <MenuItem value={"hidrologia"}>Hidrología</MenuItem>
+      <MenuItem value={"No aplica"}>No aplica</MenuItem>
+    </Select>
+  </FormControl>
+
+  {/* Campo de Red de monitoreo */}
+  <FormControl fullWidth variant="outlined" margin="normal" sx={{ width: 'calc(50% - 8px)' }}>
+    <InputLabel>Red de monitoreo</InputLabel>
+    <Select
+      value={redMonitoreo}
+      onChange={(e) => setRedMonitoreo(e.target.value)}
+      label="Red de monitoreo"
+    >
+      <MenuItem value={"pluviometriaca"}>Pluviometriaca</MenuItem>
+      <MenuItem value={"nivel"}>Nivel</MenuItem>
+      <MenuItem value={"camaras"}>Cámaras</MenuItem>
+    </Select>
+  </FormControl>
+  
+</Box>
 
             {/* Campo de descripción */}
             <TextField
