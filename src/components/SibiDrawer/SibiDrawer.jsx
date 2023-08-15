@@ -46,7 +46,7 @@ const options = [
       },
       {
         item: 'Egresos',
-        url: '/expenses',
+        url: '/outflows',
       },
     ],
   },
