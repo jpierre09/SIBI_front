@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box, TextField, Typography } from '@mui/material';
+import { Box, TextField, Typography, Button } from '@mui/material';
 
 
 
@@ -118,7 +118,7 @@ export default function DataTable() {
           marginBottom: '10px'
         }}
       >
-        <Typography variant="h5">Egresos</Typography>
+        <Typography variant="h5">Articulos egresados</Typography>
         <TextField 
           variant="outlined" 
           size="small"
@@ -126,6 +126,7 @@ export default function DataTable() {
           value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
         />
+        
       </Box>
       <DataGrid
         rows={filteredRows}
