@@ -194,12 +194,14 @@ const OutflowsModal = ({ open, onClose }) => {
             marginTop: '20px',
           }}
         >
-          <Button variant="contained" onClick={onClose}>
+          <Button variant="contained"
+          sx={{ backgroundColor: "#184287", '&:hover': { backgroundColor: "#133466" } }}
+           onClick={onClose}>
             Cancelar
           </Button>
           <Button
             variant="contained"
-            color="primary"
+            sx={{ backgroundColor: "#184287", '&:hover': { backgroundColor: "#133466" } }}
             onClick={() => {
               console.log('Egreso añadido');
               onClose();

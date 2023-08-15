@@ -24,7 +24,11 @@ export const Outflows = () => {
           <Button
             variant="contained"
             color="primary"
-            sx={{ borderRadius: '13px' }}
+            sx={{
+              backgroundColor: "#184287", 
+              '&:hover': { backgroundColor: "#133466" },  
+              borderRadius: '13px'
+            }}
             onClick={() => setModalOpen(true)} // Abre el modal al hacer clic
           >
             + Crear nuevo egreso
