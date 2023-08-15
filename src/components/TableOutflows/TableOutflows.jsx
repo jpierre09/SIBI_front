@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { Box, TextField, Typography } from '@mui/material';
+
+
 
 const columns = [
   { field: 'tipo_bien', headerName: 'Tipo de bien', width: 140 },
@@ -94,13 +96,39 @@ const rows = [
 ];
 
 export default function DataTable() {
+  const [searchTerm, setSearchTerm] = React.useState('');
+
+  const filteredRows = rows.filter(row => 
+    row.articulo.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    row.proveedor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    row.cartera.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <Box
       sx={{
         margin: '10px',
-      }}>
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '10px'
+        }}
+      >
+        <Typography variant="h5">Egresos</Typography>
+        <TextField 
+          variant="outlined" 
+          size="small"
+          label="Buscar"
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+        />
+      </Box>
       <DataGrid
-        rows={rows}
+        rows={filteredRows}
         columns={columns}
         initialState={{
           pagination: {
