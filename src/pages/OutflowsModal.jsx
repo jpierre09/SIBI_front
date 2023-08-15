@@ -6,6 +6,7 @@ const OutflowsModal = ({ open, onClose }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [location, setLocation] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [dependencia, setDependencia] = React.useState(""); // Estado para Dependencia
 
   const [articleData, setArticleData] = React.useState({});
 
@@ -81,6 +82,21 @@ const OutflowsModal = ({ open, onClose }) => {
                 sx={{ width: 'calc(50% - 8px)' }}
               />
             </Box>
+
+            {/* Campo de Dependencia */}
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel>Dependencia</InputLabel>
+              <Select
+                value={dependencia}
+                onChange={(e) => setDependencia(e.target.value)}
+                label="Dependencia"
+              >
+                <MenuItem value={"mantenimiento"}>Mantenimiento</MenuItem>
+                <MenuItem value={"telemetria"}>Telemetría</MenuItem>
+                <MenuItem value={"hidrologia"}>Hidrología</MenuItem>
+                <MenuItem value={"No aplica"}>No aplica</MenuItem>
+              </Select>
+            </FormControl>
 
             {/* Campo de descripción */}
             <TextField
