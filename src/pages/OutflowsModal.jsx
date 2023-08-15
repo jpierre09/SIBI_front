@@ -18,6 +18,10 @@ const OutflowsModal = ({ open, onClose }) => {
   const [selectedDate, setSelectedDate] = React.useState(today);
   const [selectedTime, setSelectedTime] = React.useState(currentTime);
 
+  const [departamento, setDepartamento] = React.useState("");
+  const [municipio, setMunicipio] = React.useState("");
+  const [barrio, setBarrio] = React.useState("");
+
   const fetchArticleData = (searchTerm) => {
     if (searchTerm) {
       setArticleData({
@@ -119,36 +123,42 @@ const OutflowsModal = ({ open, onClose }) => {
 
 
             {/* Título "Datos de ubicación" */}
-            <Typography variant="subtitle1" gutterBottom>
-              Datos de ubicación
-            </Typography>
+          <Typography variant="subtitle1" gutterBottom>
+            Datos de ubicación:
+          </Typography>
 
-            {/* Campos de ubicación */}
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+          {/* Campos de Departamento, Municipio y Barrio */}
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Departamento"
+              value={departamento}
+              onChange={(e) => setDepartamento(e.target.value)}
+              sx={{ marginRight: '16px', width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
+            />
 
-              {/* Primer campo de ubicación */}
-              <TextField
-                fullWidth
-                margin="normal"
-                variant="outlined"
-                label="Departamento"
-                value={location} // Puedes cambiar esto por su propio estado si es necesario
-                onChange={(e) => setLocation(e.target.value)} // Lo mismo aquí
-                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}
-              />
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Municipio"
+              value={municipio}
+              onChange={(e) => setMunicipio(e.target.value)}
+              sx={{ marginRight: '16px', width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
+            />
 
-              {/* Segundo campo de ubicación */}
-              <TextField
-                fullWidth
-                margin="normal"
-                variant="outlined"
-                label="Municipio"
-                value={location} // Cambia por otro estado si es necesario
-                onChange={(e) => setLocation(e.target.value)} // Lo mismo aquí
-                sx={{ width: 'calc(50% - 8px)' }}
-              />
-
-            </Box>
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Barrio"
+              value={barrio}
+              onChange={(e) => setBarrio(e.target.value)}
+              sx={{ width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
+            />
+          </Box>
 
             {/* Campo de descripción */}
             <TextField
