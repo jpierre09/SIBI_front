@@ -7,6 +7,7 @@ const OutflowsModal = ({ open, onClose }) => {
   const [location, setLocation] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [dependencia, setDependencia] = React.useState(""); // Estado para Dependencia
+  const [redMonitoreo, setRedMonitoreo] = React.useState(""); // Estado para Red de monitoreo
 
   const [articleData, setArticleData] = React.useState({});
 
@@ -95,6 +96,20 @@ const OutflowsModal = ({ open, onClose }) => {
                 <MenuItem value={"telemetria"}>Telemetría</MenuItem>
                 <MenuItem value={"hidrologia"}>Hidrología</MenuItem>
                 <MenuItem value={"No aplica"}>No aplica</MenuItem>
+              </Select>
+            </FormControl>
+
+            {/* Campo de Red de monitoreo */}
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel>Red de monitoreo</InputLabel>
+              <Select
+                value={redMonitoreo}
+                onChange={(e) => setRedMonitoreo(e.target.value)}
+                label="Red de monitoreo"
+              >
+                <MenuItem value={"pluviometriaca"}>Pluviometriaca</MenuItem>
+                <MenuItem value={"nivel"}>Nivel</MenuItem>
+                <MenuItem value={"camaras"}>Cámaras</MenuItem>
               </Select>
             </FormControl>
 
