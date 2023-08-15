@@ -86,36 +86,69 @@ const OutflowsModal = ({ open, onClose }) => {
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
 
-  {/* Campo de Dependencia */}
-  <FormControl fullWidth variant="outlined" margin="normal" sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}>
-    <InputLabel>Dependencia</InputLabel>
-    <Select
-      value={dependencia}
-      onChange={(e) => setDependencia(e.target.value)}
-      label="Dependencia"
-    >
-      <MenuItem value={"mantenimiento"}>Mantenimiento</MenuItem>
-      <MenuItem value={"telemetria"}>Telemetría</MenuItem>
-      <MenuItem value={"hidrologia"}>Hidrología</MenuItem>
-      <MenuItem value={"No aplica"}>No aplica</MenuItem>
-    </Select>
-  </FormControl>
+              {/* Campo de Dependencia */}
+              <FormControl fullWidth variant="outlined" margin="normal" sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}>
+                <InputLabel>Dependencia</InputLabel>
+                <Select
+                  value={dependencia}
+                  onChange={(e) => setDependencia(e.target.value)}
+                  label="Dependencia"
+                >
+                  <MenuItem value={"mantenimiento"}>Mantenimiento</MenuItem>
+                  <MenuItem value={"telemetria"}>Telemetría</MenuItem>
+                  <MenuItem value={"hidrologia"}>Hidrología</MenuItem>
+                  <MenuItem value={"No aplica"}>No aplica</MenuItem>
+                </Select>
+              </FormControl>
 
-  {/* Campo de Red de monitoreo */}
-  <FormControl fullWidth variant="outlined" margin="normal" sx={{ width: 'calc(50% - 8px)' }}>
-    <InputLabel>Red de monitoreo</InputLabel>
-    <Select
-      value={redMonitoreo}
-      onChange={(e) => setRedMonitoreo(e.target.value)}
-      label="Red de monitoreo"
-    >
-      <MenuItem value={"pluviometriaca"}>Pluviometriaca</MenuItem>
-      <MenuItem value={"nivel"}>Nivel</MenuItem>
-      <MenuItem value={"camaras"}>Cámaras</MenuItem>
-    </Select>
-  </FormControl>
-  
-</Box>
+              {/* Campo de Red de monitoreo */}
+              <FormControl fullWidth variant="outlined" margin="normal" sx={{ width: 'calc(50% - 8px)' }}>
+                <InputLabel>Red de monitoreo</InputLabel>
+                <Select
+                  value={redMonitoreo}
+                  onChange={(e) => setRedMonitoreo(e.target.value)}
+                  label="Red de monitoreo"
+                >
+                  <MenuItem value={"pluviometriaca"}>Pluviometriaca</MenuItem>
+                  <MenuItem value={"nivel"}>Nivel</MenuItem>
+                  <MenuItem value={"camaras"}>Cámaras</MenuItem>
+                </Select>
+              </FormControl>
+
+            </Box>
+
+
+            {/* Título "Datos de ubicación" */}
+            <Typography variant="subtitle1" gutterBottom>
+              Datos de ubicación
+            </Typography>
+
+            {/* Campos de ubicación */}
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+
+              {/* Primer campo de ubicación */}
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Departamento"
+                value={location} // Puedes cambiar esto por su propio estado si es necesario
+                onChange={(e) => setLocation(e.target.value)} // Lo mismo aquí
+                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}
+              />
+
+              {/* Segundo campo de ubicación */}
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Municipio"
+                value={location} // Cambia por otro estado si es necesario
+                onChange={(e) => setLocation(e.target.value)} // Lo mismo aquí
+                sx={{ width: 'calc(50% - 8px)' }}
+              />
+
+            </Box>
 
             {/* Campo de descripción */}
             <TextField
@@ -199,8 +232,8 @@ const OutflowsModal = ({ open, onClose }) => {
           }}
         >
           <Button variant="contained"
-          sx={{ backgroundColor: "#184287", '&:hover': { backgroundColor: "#133466" } }}
-           onClick={onClose}>
+            sx={{ backgroundColor: "#184287", '&:hover': { backgroundColor: "#133466" } }}
+            onClick={onClose}>
             Cancelar
           </Button>
           <Button
