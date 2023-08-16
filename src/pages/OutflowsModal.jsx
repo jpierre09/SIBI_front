@@ -18,6 +18,10 @@ const OutflowsModal = ({ open, onClose }) => {
   const [selectedDate, setSelectedDate] = React.useState(today);
   const [selectedTime, setSelectedTime] = React.useState(currentTime);
 
+  const [departamento, setDepartamento] = React.useState("");
+  const [municipio, setMunicipio] = React.useState("");
+  const [barrio, setBarrio] = React.useState("");
+
   const fetchArticleData = (searchTerm) => {
     if (searchTerm) {
       setArticleData({
@@ -84,34 +88,77 @@ const OutflowsModal = ({ open, onClose }) => {
               />
             </Box>
 
-            {/* Campo de Dependencia */}
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel>Dependencia</InputLabel>
-              <Select
-                value={dependencia}
-                onChange={(e) => setDependencia(e.target.value)}
-                label="Dependencia"
-              >
-                <MenuItem value={"mantenimiento"}>Mantenimiento</MenuItem>
-                <MenuItem value={"telemetria"}>Telemetría</MenuItem>
-                <MenuItem value={"hidrologia"}>Hidrología</MenuItem>
-                <MenuItem value={"No aplica"}>No aplica</MenuItem>
-              </Select>
-            </FormControl>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
 
-            {/* Campo de Red de monitoreo */}
-            <FormControl fullWidth variant="outlined" margin="normal">
-              <InputLabel>Red de monitoreo</InputLabel>
-              <Select
-                value={redMonitoreo}
-                onChange={(e) => setRedMonitoreo(e.target.value)}
-                label="Red de monitoreo"
-              >
-                <MenuItem value={"pluviometriaca"}>Pluviometriaca</MenuItem>
-                <MenuItem value={"nivel"}>Nivel</MenuItem>
-                <MenuItem value={"camaras"}>Cámaras</MenuItem>
-              </Select>
-            </FormControl>
+              {/* Campo de Dependencia */}
+              <FormControl fullWidth variant="outlined" margin="normal" sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}>
+                <InputLabel>Dependencia</InputLabel>
+                <Select
+                  value={dependencia}
+                  onChange={(e) => setDependencia(e.target.value)}
+                  label="Dependencia"
+                >
+                  <MenuItem value={"mantenimiento"}>Mantenimiento</MenuItem>
+                  <MenuItem value={"telemetria"}>Telemetría</MenuItem>
+                  <MenuItem value={"hidrologia"}>Hidrología</MenuItem>
+                  <MenuItem value={"No aplica"}>No aplica</MenuItem>
+                </Select>
+              </FormControl>
+
+              {/* Campo de Red de monitoreo */}
+              <FormControl fullWidth variant="outlined" margin="normal" sx={{ width: 'calc(50% - 8px)' }}>
+                <InputLabel>Red de monitoreo</InputLabel>
+                <Select
+                  value={redMonitoreo}
+                  onChange={(e) => setRedMonitoreo(e.target.value)}
+                  label="Red de monitoreo"
+                >
+                  <MenuItem value={"pluviometriaca"}>Pluviometriaca</MenuItem>
+                  <MenuItem value={"nivel"}>Nivel</MenuItem>
+                  <MenuItem value={"camaras"}>Cámaras</MenuItem>
+                </Select>
+              </FormControl>
+
+            </Box>
+
+
+            {/* Título "Datos de ubicación" */}
+          <Typography variant="subtitle1" gutterBottom>
+            Datos de ubicación:
+          </Typography>
+
+          {/* Campos de Departamento, Municipio y Barrio */}
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Departamento"
+              value={departamento}
+              onChange={(e) => setDepartamento(e.target.value)}
+              sx={{ marginRight: '16px', width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
+            />
+
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Municipio"
+              value={municipio}
+              onChange={(e) => setMunicipio(e.target.value)}
+              sx={{ marginRight: '16px', width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
+            />
+
+            <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Barrio"
+              value={barrio}
+              onChange={(e) => setBarrio(e.target.value)}
+              sx={{ width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
+            />
+          </Box>
 
             {/* Campo de descripción */}
             <TextField
@@ -195,8 +242,8 @@ const OutflowsModal = ({ open, onClose }) => {
           }}
         >
           <Button variant="contained"
-          sx={{ backgroundColor: "#184287", '&:hover': { backgroundColor: "#133466" } }}
-           onClick={onClose}>
+            sx={{ backgroundColor: "#184287", '&:hover': { backgroundColor: "#133466" } }}
+            onClick={onClose}>
             Cancelar
           </Button>
           <Button
