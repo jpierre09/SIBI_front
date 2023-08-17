@@ -233,7 +233,7 @@ const OutflowsModal = ({ open, onClose }) => {
                 fullWidth
                 margin="normal"
                 variant="outlined"
-                label="Latitud (6.2177)"
+                label="Latitud (6.xxxx)"
                 value={latitud}
                 onChange={(e) => setLatitud(e.target.value)}
                 sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
@@ -243,7 +243,7 @@ const OutflowsModal = ({ open, onClose }) => {
                 fullWidth
                 margin="normal"
                 variant="outlined"
-                label="Longitud (-75.5678)"
+                label="Longitud (-75.xxxx)"
                 value={longitud}
                 onChange={(e) => setLongitud(e.target.value)}
                 sx={{ width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
