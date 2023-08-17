@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Box, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
 
+
 const OutflowsModal = ({ open, onClose }) => {
   // Estados
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -26,6 +27,7 @@ const OutflowsModal = ({ open, onClose }) => {
   const [departamento, setDepartamento] = React.useState("");
   const [municipio, setMunicipio] = React.useState("");
   const [barrio, setBarrio] = React.useState("");
+  const [cuenca, setcuenca] = React.useState("");
   const [latitud, setLatitud] = React.useState("");
   const [longitud, setLongitud] = React.useState("");
   const [direccion, setdireccion] = React.useState("");
@@ -105,7 +107,7 @@ const OutflowsModal = ({ open, onClose }) => {
               fullWidth
               margin="normal"
               variant="outlined"
-              label="Nombre estacion"
+              label="Nombre"
               value={nombreestacion}
               onChange={(e) => setnombreestacion(e.target.value)}
               sx={{ marginRight: '16px', width: 'calc(48% - 8px)' }} // Ajuste del width para 3 campos
@@ -185,39 +187,59 @@ const OutflowsModal = ({ open, onClose }) => {
             Datos de ubicación:
           </Typography>
 
-          {/* Campos de Departamento, Municipio y Barrio */}
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-            <TextField
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              label="Departamento"
-              value={departamento}
-              onChange={(e) => setDepartamento(e.target.value)}
-              sx={{ marginRight: '16px', width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
-            />
+            {/* Campos de Departamento, Municipio y Barrio */}
+            <Box
+              sx={{
+                display: 'flex',
+                marginBottom: '16px',
+                '& > *:not(:last-child)': {
+                  marginRight: '16px',
+                },
+              }}
+            >
+              <FormControl variant="outlined" margin="normal" sx={{ width: 'calc(25% - 8px)' }}>
+                <InputLabel>Depto</InputLabel>
+                <Select
+                  value={departamento}
+                  onChange={(e) => setDepartamento(e.target.value)}
+                  label="Departamento"
+                >
+                  <MenuItem value={"Antioquia"}>Antioquia</MenuItem>
+                </Select>
+              </FormControl>
 
-            <TextField
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              label="Municipio"
-              value={municipio}
-              onChange={(e) => setMunicipio(e.target.value)}
-              sx={{ marginRight: '16px', width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
-            />
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Municipio"
+                value={municipio}
+                onChange={(e) => setMunicipio(e.target.value)}
+                sx={{ width: 'calc(25% - 8px)' }}
+              />
 
-            <TextField
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              label="Barrio"
-              value={barrio}
-              onChange={(e) => setBarrio(e.target.value)}
-              sx={{ width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
-            />
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Barrio"
+                value={barrio}
+                onChange={(e) => setBarrio(e.target.value)}
+                sx={{ width: 'calc(25% - 8px)' }}
+              />
 
-          </Box>
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Cuenca"
+                value={cuenca}
+                onChange={(e) => setcuenca(e.target.value)}
+                sx={{ width: 'calc(25% - 8px)' }}
+              />
+
+            </Box>
+
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
               <TextField
