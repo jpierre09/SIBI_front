@@ -67,7 +67,7 @@ const OutflowsModal = ({ open, onClose }) => {
         }}
       >
         <Typography variant="h5" gutterBottom>
-          Crear nuevo egreso
+          Crear nuevo egreso activo fijo
         </Typography>
 
         <Box sx={{ display: 'flex' }}>
