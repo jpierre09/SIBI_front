@@ -22,21 +22,41 @@ const columns = [
 ];
 
 export default function DataTable() {
-  const {activosFijos, articulos} = getAdminApi();
+  const {
+    activosFijos,
+    articulos,
+    carteras,
+    controles,
+    ivas,
+    marcas,
+    monedas,
+    proveedores,
+    referencias,
+    ubicaciones,
+  } = getAdminApi();
 
-  const mappedRows = activosFijos.map((activoFijo, articulo) => ({
+  const mappedRows = activosFijos.map(activoFijo => ({
     id: activoFijo.id,
     tipo_bien: activoFijo.cantidad, //este campo no va acá
-    articulo: articulos[articulo].nombre,
-    proveedor: activoFijo.proveedor,
-    cartera: activoFijo.cartera,
-    marca: activoFijo.marca,
-    referencia: activoFijo.referencia,
+    articulo: articulos.find(articulo => articulo.id === activoFijo.articulo)
+      .nombre,
+    proveedor: proveedores.find(
+      proveedor => proveedor.id === activoFijo.proveedor
+    ).nombre,
+    cartera: carteras.find(cartera => cartera.id === activoFijo.cartera).nombre,
+    marca: marcas.find(marca => marca.id === activoFijo.marca).nombre,
+    referencia: referencias.find(
+      referencia => referencia.id === activoFijo.referencia
+    ).nombre,
     modelo: activoFijo.modelo,
-    moneda: activoFijo.moneda,
-    iva: activoFijo.iva,
-    ubicacion: activoFijo.ubicacion,
-    control_legalizable: activoFijo.control,
+    moneda: monedas.find(moneda => moneda.id === activoFijo.moneda).tipo,
+    iva: ivas.find(iva => iva.id === activoFijo.iva).descripcion,
+    ubicacion: ubicaciones.find(
+      ubicacion => ubicacion.id === activoFijo.ubicacion
+    ).lugar,
+    control_legalizable: controles.find(
+      control => control.id === activoFijo.control
+    ).tipo,
   }));
 
   return (
