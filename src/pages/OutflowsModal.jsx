@@ -6,6 +6,7 @@ const OutflowsModal = ({ open, onClose }) => {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [location, setLocation] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [nombreestacion, setnombreestacion] = React.useState("")
   const [dependencia, setDependencia] = React.useState(""); // Estado para Dependencia
   const [redMonitoreo, setRedMonitoreo] = React.useState(""); // Estado para Red de monitoreo
 
@@ -23,6 +24,8 @@ const OutflowsModal = ({ open, onClose }) => {
   const [barrio, setBarrio] = React.useState("");
   const [latitud, setLatitud] = React.useState("");
   const [longitud, setLongitud] = React.useState("");
+  const [direccion, setdireccion] = React.useState("");
+
 
   const fetchArticleData = (searchTerm) => {
     if (searchTerm) {
@@ -93,7 +96,19 @@ const OutflowsModal = ({ open, onClose }) => {
             <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
 
               {/* Campo de Dependencia */}
-              <FormControl fullWidth variant="outlined" margin="normal" sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}>
+
+              <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Nombre estacion"
+              value={nombreestacion}
+              onChange={(e) => setnombreestacion(e.target.value)}
+              sx={{ marginRight: '16px', width: 'calc(48% - 8px)' }} // Ajuste del width para 3 campos
+            />
+
+
+              <FormControl fullWidth variant="outlined" margin="normal" sx={{ marginRight: '16px', width: 'calc(48% - 8px)' }}>
                 <InputLabel>Dependencia</InputLabel>
                 <Select
                   value={dependencia}
@@ -108,8 +123,8 @@ const OutflowsModal = ({ open, onClose }) => {
               </FormControl>
 
               {/* Campo de Red de monitoreo */}
-              <FormControl fullWidth variant="outlined" margin="normal" sx={{ width: 'calc(50% - 8px)' }}>
-                <InputLabel>Red de monitoreo</InputLabel>
+              <FormControl fullWidth variant="outlined" margin="normal" sx={{ width: 'calc(48% - 8px)' }}>
+                <InputLabel>Red monitoreo</InputLabel>
                 <Select
                   value={redMonitoreo}
                   onChange={(e) => setRedMonitoreo(e.target.value)}
@@ -163,27 +178,36 @@ const OutflowsModal = ({ open, onClose }) => {
 
           </Box>
 
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-  <TextField
-    fullWidth
-    margin="normal"
-    variant="outlined"
-    label="Latitud"
-    value={latitud}
-    onChange={(e) => setLatitud(e.target.value)}
-    sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
-  />
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Direccion"
+                value={direccion}
+                onChange={(e) => setdireccion(e.target.value)}
+                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
+              />
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Latitud (6.2177)"
+                value={latitud}
+                onChange={(e) => setLatitud(e.target.value)}
+                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
+              />
 
-  <TextField
-    fullWidth
-    margin="normal"
-    variant="outlined"
-    label="Longitud"
-    value={longitud}
-    onChange={(e) => setLongitud(e.target.value)}
-    sx={{ width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
-  />
-</Box>
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Longitud (-75.5678)"
+                value={longitud}
+                onChange={(e) => setLongitud(e.target.value)}
+                sx={{ width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
+              />
+            </Box>
 
 
             {/* Campo de descripción */}
