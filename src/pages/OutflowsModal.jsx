@@ -1,13 +1,20 @@
 import React from 'react';
 import { Modal, Box, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const OutflowsModal = ({ open, onClose }) => {
   // Estados
   const [searchTerm, setSearchTerm] = React.useState("");
   const [location, setLocation] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const [dependencia, setDependencia] = React.useState(""); // Estado para Dependencia
-  const [redMonitoreo, setRedMonitoreo] = React.useState(""); // Estado para Red de monitoreo
+  const [nombreestacion, setnombreestacion] = React.useState("")
+  const [dependencia, setDependencia] = React.useState(""); 
+  const [redMonitoreo, setRedMonitoreo] = React.useState(""); 
+  const [placaamva, setplacaamva] = React.useState("")
+  const [codigoestacion, setcodigoestacion] = React.useState(""); 
+  const [convenio, setconvenio] = React.useState(""); 
+
 
   const [articleData, setArticleData] = React.useState({});
 
@@ -18,9 +25,19 @@ const OutflowsModal = ({ open, onClose }) => {
   const [selectedDate, setSelectedDate] = React.useState(today);
   const [selectedTime, setSelectedTime] = React.useState(currentTime);
 
+  const [isComputer, setIsComputer] = React.useState(false); // Estado para el switch "¿Es un computador?"
+  const [computerType, setComputerType] = React.useState("");
+
   const [departamento, setDepartamento] = React.useState("");
   const [municipio, setMunicipio] = React.useState("");
   const [barrio, setBarrio] = React.useState("");
+  const [cuenca, setcuenca] = React.useState("");
+  const [latitud, setLatitud] = React.useState("");
+  const [longitud, setLongitud] = React.useState("");
+  const [direccion, setdireccion] = React.useState("");
+
+
+
 
   const fetchArticleData = (searchTerm) => {
     if (searchTerm) {
@@ -50,7 +67,7 @@ const OutflowsModal = ({ open, onClose }) => {
         }}
       >
         <Typography variant="h5" gutterBottom>
-          Crear nuevo egreso
+          Crear nuevo egreso activo fijo
         </Typography>
 
         <Box sx={{ display: 'flex' }}>
@@ -91,7 +108,19 @@ const OutflowsModal = ({ open, onClose }) => {
             <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
 
               {/* Campo de Dependencia */}
-              <FormControl fullWidth variant="outlined" margin="normal" sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}>
+
+              <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Nombre"
+              value={nombreestacion}
+              onChange={(e) => setnombreestacion(e.target.value)}
+              sx={{ marginRight: '16px', width: 'calc(48% - 8px)' }} // Ajuste del width para 3 campos
+            />
+
+
+              <FormControl fullWidth variant="outlined" margin="normal" sx={{ marginRight: '16px', width: 'calc(48% - 8px)' }}>
                 <InputLabel>Dependencia</InputLabel>
                 <Select
                   value={dependencia}
@@ -106,8 +135,8 @@ const OutflowsModal = ({ open, onClose }) => {
               </FormControl>
 
               {/* Campo de Red de monitoreo */}
-              <FormControl fullWidth variant="outlined" margin="normal" sx={{ width: 'calc(50% - 8px)' }}>
-                <InputLabel>Red de monitoreo</InputLabel>
+              <FormControl fullWidth variant="outlined" margin="normal" sx={{ width: 'calc(48% - 8px)' }}>
+                <InputLabel>Red monitoreo</InputLabel>
                 <Select
                   value={redMonitoreo}
                   onChange={(e) => setRedMonitoreo(e.target.value)}
@@ -122,43 +151,169 @@ const OutflowsModal = ({ open, onClose }) => {
             </Box>
 
 
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+
+             
+              <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Placa AMVA"
+              value={placaamva}
+              onChange={(e) => setplacaamva(e.target.value)}
+              sx={{ marginRight: '16px', width: 'calc(33.333% - 10.666px)' }} // Ajuste del width para 3 campos
+            />
+
+
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Codigo estación"
+                value={codigoestacion}
+                onChange={(e) => setcodigoestacion(e.target.value)}
+                sx={{ marginRight: '16px', width: 'calc(33.333% - 10.666px)' }} 
+              />
+
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Convenio"
+                value={convenio}
+                onChange={(e) => setconvenio(e.target.value)}
+                sx={{  width: 'calc(33.333% - 8px)' }} 
+              />
+
+            </Box>
+
+            {/* Switch "¿Es un computador?" */}
+            <Box sx={{ marginBottom: '16px' }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isComputer}
+                    onChange={(event) => setIsComputer(event.target.checked)}
+                    name="isComputer"
+                    color="primary"
+                  />
+                }
+                label="Computador personal? se entrega en:"
+                sx={{ marginRight: '16px'  }}
+              />
+              {isComputer && (
+                <FormControl variant="outlined" size="small" sx={{ width: 'calc(30% - 8px)' }}>
+                  <InputLabel>Ubicación</InputLabel>
+                  <Select
+                    value={computerType}
+                    onChange={(e) => setComputerType(e.target.value)}
+                  >
+                    <MenuItem value={"Casa SIATA"}>Torre SIATA</MenuItem>
+                    <MenuItem value={"Torre SIATA"}>Casa SIATA</MenuItem>
+                    <MenuItem value={"Bodega 808"}>Bodega 808</MenuItem>
+                    <MenuItem value={"Bodega 808"}>AMVA</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            </Box>
+
+
             {/* Título "Datos de ubicación" */}
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant="datos_ubicacion" gutterBottom>
             Datos de ubicación:
           </Typography>
 
-          {/* Campos de Departamento, Municipio y Barrio */}
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
-            <TextField
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              label="Departamento"
-              value={departamento}
-              onChange={(e) => setDepartamento(e.target.value)}
-              sx={{ marginRight: '16px', width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
-            />
+            {/* Campos de Departamento, Municipio y Barrio */}
+            <Box
+              sx={{
+                display: 'flex',
+                marginBottom: '16px',
+                '& > *:not(:last-child)': {
+                  marginRight: '16px',
+                },
+              }}
+            >
+              <FormControl variant="outlined" margin="normal" sx={{ width: 'calc(25% - 8px)' }} disabled={isComputer}>
+                <InputLabel>Depto</InputLabel>
+                <Select
+                  value={departamento}
+                  onChange={(e) => setDepartamento(e.target.value)}
+                  label="Departamento"
+                >
+                  <MenuItem value={"Antioquia"}>Antioquia</MenuItem>
+                </Select>
+              </FormControl>
 
-            <TextField
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              label="Municipio"
-              value={municipio}
-              onChange={(e) => setMunicipio(e.target.value)}
-              sx={{ marginRight: '16px', width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
-            />
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Municipio"
+                value={municipio}
+                onChange={(e) => setMunicipio(e.target.value)}
+                sx={{ width: 'calc(25% - 8px)' }}
+                disabled={isComputer}
+              />
 
-            <TextField
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              label="Barrio"
-              value={barrio}
-              onChange={(e) => setBarrio(e.target.value)}
-              sx={{ width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
-            />
-          </Box>
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Barrio"
+                value={barrio}
+                onChange={(e) => setBarrio(e.target.value)}
+                sx={{ width: 'calc(25% - 8px)' }}
+                disabled={isComputer}
+              />
+
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Cuenca"
+                value={cuenca}
+                onChange={(e) => setcuenca(e.target.value)}
+                sx={{ width: 'calc(25% - 8px)' }}
+                disabled={isComputer}
+              />
+
+            </Box>
+
+
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }} >
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Direccion"
+                value={direccion}
+                onChange={(e) => setdireccion(e.target.value)}
+                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}
+                disabled={isComputer} 
+              />
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Latitud (6.xxxx)"
+                value={latitud}
+                onChange={(e) => setLatitud(e.target.value)}
+                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} 
+                disabled={isComputer}
+              />
+
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Longitud (-75.xxxx)"
+                value={longitud}
+                onChange={(e) => setLongitud(e.target.value)}
+                sx={{ width: 'calc(50% - 8px)' }}
+                disabled={isComputer}
+              />
+            </Box>
+
 
             {/* Campo de descripción */}
             <TextField
