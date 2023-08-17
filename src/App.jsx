@@ -12,8 +12,8 @@ import { Outflows } from './pages/Outflows';
 function App() {
   return (
     <Routes>
-      <Route path="/income" element={<Income />} />
       <Route path='/' element={<Home />} />
+      <Route path="/income" element={<Income />} />
       <Route path='/outflows' element={<Outflows />} />
     </Routes>
   );

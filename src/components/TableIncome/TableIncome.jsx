@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
+import { getAdminApi } from '../../services/adminApi';
 
 const columns = [
   { field: 'tipo_bien', headerName: 'Tipo de bien', width: 140 },
@@ -20,87 +21,31 @@ const columns = [
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    tipo_bien: 'Activo fijo',
-    articulo: 'Sensor de alcantarillado',
-    proveedor: 'DF ROBOT',
-    cartera: 'Riesgos',
-    marca: 'DF-ROBOT',
-    referencia: 'TF03-UART 5-24V',
-    modelo: 'TF03-UART 5-24V',
-    moneda: 'USD',
-    iva: '10%',
-    ubicacion: 'Bodega Casa SIATA',
-    control_legalizable: 'Control',
-  },
-  {
-    id: 2,
-    tipo_bien: 'Activo fijo',
-    articulo: 'Sensor de nivel',
-    proveedor: 'SIEMENS S.A.',
-    cartera: 'Riesgos',
-    marca: 'SIEMENS',
-    referencia: 'PBE-5AC-620',
-    modelo: 'PBE-5AC-620',
-    moneda: 'COP',
-    iva: '19%',
-    ubicacion: 'Bodega 808',
-    control_legalizable: 'Legalizable',
-  },
-  {
-    id: 3,
-    tipo_bien: 'Activo fijo',
-    articulo: 'Antena',
-    proveedor: 'CORE IP',
-    cartera: 'Riesgos',
-    marca: 'UBIQUITI',
-    referencia: 'MAX SECTOR 5AC 21-60',
-    modelo: 'MAX SECTOR 5AC 21-60',
-    moneda: 'COP',
-    iva: '19%',
-    ubicacion: 'Torre SIATA',
-    control_legalizable: 'Control',
-  },
-  {
-    id: 4,
-    tipo_bien: 'Activo fijo',
-    articulo: 'Antena',
-    proveedor: 'CORE IP',
-    cartera: 'Aire',
-    marca: 'UBIQUITI',
-    referencia: 'R-5AC- PRISM',
-    modelo: 'R-5AC- PRISM',
-    moneda: 'COP',
-    iva: '19%',
-    ubicacion: 'Torre SIATA',
-    control_legalizable: 'Control',
-  },
-  {
-    id: 5,
-    tipo_bien: 'Activo fijo',
-    articulo: 'Pluviometro',
-    proveedor: 'DAVIS INSTRUMENT',
-    cartera: 'Riesgos',
-    marca: 'DAVIS',
-    referencia: 'RAIN COLLECTOR II',
-    modelo: 'RAIN COLLECTOR II',
-    moneda: 'USD',
-    iva: '0%',
-    ubicacion: 'Casa SIATA',
-    control_legalizable: 'Control',
-  },
-];
-
 export default function DataTable() {
+  const {activosFijos, articulos} = getAdminApi();
+
+  const mappedRows = activosFijos.map((activoFijo, articulo) => ({
+    id: activoFijo.id,
+    tipo_bien: activoFijo.cantidad, //este campo no va acá
+    articulo: articulos[articulo].nombre,
+    proveedor: activoFijo.proveedor,
+    cartera: activoFijo.cartera,
+    marca: activoFijo.marca,
+    referencia: activoFijo.referencia,
+    modelo: activoFijo.modelo,
+    moneda: activoFijo.moneda,
+    iva: activoFijo.iva,
+    ubicacion: activoFijo.ubicacion,
+    control_legalizable: activoFijo.control,
+  }));
+
   return (
     <Box
       sx={{
         margin: '10px',
       }}>
       <DataGrid
-        rows={rows}
+        rows={mappedRows}
         columns={columns}
         initialState={{
           pagination: {
