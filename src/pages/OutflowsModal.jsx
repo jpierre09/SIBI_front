@@ -7,8 +7,12 @@ const OutflowsModal = ({ open, onClose }) => {
   const [location, setLocation] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [nombreestacion, setnombreestacion] = React.useState("")
-  const [dependencia, setDependencia] = React.useState(""); // Estado para Dependencia
-  const [redMonitoreo, setRedMonitoreo] = React.useState(""); // Estado para Red de monitoreo
+  const [dependencia, setDependencia] = React.useState(""); 
+  const [redMonitoreo, setRedMonitoreo] = React.useState(""); 
+  const [placaamva, setplacaamva] = React.useState("")
+  const [codigoestacion, setcodigoestacion] = React.useState(""); 
+  const [convenio, setconvenio] = React.useState(""); 
+
 
   const [articleData, setArticleData] = React.useState({});
 
@@ -135,6 +139,43 @@ const OutflowsModal = ({ open, onClose }) => {
                   <MenuItem value={"camaras"}>Cámaras</MenuItem>
                 </Select>
               </FormControl>
+
+            </Box>
+
+
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+
+             
+              <TextField
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              label="Placa AMVA"
+              value={placaamva}
+              onChange={(e) => setplacaamva(e.target.value)}
+              sx={{ marginRight: '16px', width: 'calc(33.333% - 10.666px)' }} // Ajuste del width para 3 campos
+            />
+
+
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Codigo estación"
+                value={codigoestacion}
+                onChange={(e) => setcodigoestacion(e.target.value)}
+                sx={{ marginRight: '16px', width: 'calc(33.333% - 10.666px)' }} 
+              />
+
+              <TextField
+                fullWidth
+                margin="normal"
+                variant="outlined"
+                label="Convenio"
+                value={convenio}
+                onChange={(e) => setconvenio(e.target.value)}
+                sx={{  width: 'calc(33.333% - 8px)' }} 
+              />
 
             </Box>
 
