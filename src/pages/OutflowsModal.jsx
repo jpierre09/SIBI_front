@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Box, Typography, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material';
-
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const OutflowsModal = ({ open, onClose }) => {
   // Estados
@@ -24,6 +25,9 @@ const OutflowsModal = ({ open, onClose }) => {
   const [selectedDate, setSelectedDate] = React.useState(today);
   const [selectedTime, setSelectedTime] = React.useState(currentTime);
 
+  const [isComputer, setIsComputer] = React.useState(false); // Estado para el switch "¿Es un computador?"
+  const [computerType, setComputerType] = React.useState("");
+
   const [departamento, setDepartamento] = React.useState("");
   const [municipio, setMunicipio] = React.useState("");
   const [barrio, setBarrio] = React.useState("");
@@ -31,6 +35,8 @@ const OutflowsModal = ({ open, onClose }) => {
   const [latitud, setLatitud] = React.useState("");
   const [longitud, setLongitud] = React.useState("");
   const [direccion, setdireccion] = React.useState("");
+
+
 
 
   const fetchArticleData = (searchTerm) => {
@@ -181,6 +187,36 @@ const OutflowsModal = ({ open, onClose }) => {
 
             </Box>
 
+            {/* Switch "¿Es un computador?" */}
+            <Box sx={{ marginBottom: '16px' }}>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={isComputer}
+                    onChange={(event) => setIsComputer(event.target.checked)}
+                    name="isComputer"
+                    color="primary"
+                  />
+                }
+                label="Computador personal? se entrega en:"
+                sx={{ marginRight: '16px'  }}
+              />
+              {isComputer && (
+                <FormControl variant="outlined" size="small" sx={{ width: 'calc(30% - 8px)' }}>
+                  <InputLabel>Ubicación</InputLabel>
+                  <Select
+                    value={computerType}
+                    onChange={(e) => setComputerType(e.target.value)}
+                  >
+                    <MenuItem value={"Casa SIATA"}>Torre SIATA</MenuItem>
+                    <MenuItem value={"Torre SIATA"}>Casa SIATA</MenuItem>
+                    <MenuItem value={"Bodega 808"}>Bodega 808</MenuItem>
+                    <MenuItem value={"Bodega 808"}>AMVA</MenuItem>
+                  </Select>
+                </FormControl>
+              )}
+            </Box>
+
 
             {/* Título "Datos de ubicación" */}
           <Typography variant="datos_ubicacion" gutterBottom>
@@ -197,7 +233,7 @@ const OutflowsModal = ({ open, onClose }) => {
                 },
               }}
             >
-              <FormControl variant="outlined" margin="normal" sx={{ width: 'calc(25% - 8px)' }}>
+              <FormControl variant="outlined" margin="normal" sx={{ width: 'calc(25% - 8px)' }} disabled={isComputer}>
                 <InputLabel>Depto</InputLabel>
                 <Select
                   value={departamento}
@@ -216,6 +252,7 @@ const OutflowsModal = ({ open, onClose }) => {
                 value={municipio}
                 onChange={(e) => setMunicipio(e.target.value)}
                 sx={{ width: 'calc(25% - 8px)' }}
+                disabled={isComputer}
               />
 
               <TextField
@@ -226,6 +263,7 @@ const OutflowsModal = ({ open, onClose }) => {
                 value={barrio}
                 onChange={(e) => setBarrio(e.target.value)}
                 sx={{ width: 'calc(25% - 8px)' }}
+                disabled={isComputer}
               />
 
               <TextField
@@ -236,12 +274,13 @@ const OutflowsModal = ({ open, onClose }) => {
                 value={cuenca}
                 onChange={(e) => setcuenca(e.target.value)}
                 sx={{ width: 'calc(25% - 8px)' }}
+                disabled={isComputer}
               />
 
             </Box>
 
 
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }} >
               <TextField
                 fullWidth
                 margin="normal"
@@ -249,7 +288,8 @@ const OutflowsModal = ({ open, onClose }) => {
                 label="Direccion"
                 value={direccion}
                 onChange={(e) => setdireccion(e.target.value)}
-                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
+                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }}
+                disabled={isComputer} 
               />
               <TextField
                 fullWidth
@@ -258,7 +298,8 @@ const OutflowsModal = ({ open, onClose }) => {
                 label="Latitud (6.xxxx)"
                 value={latitud}
                 onChange={(e) => setLatitud(e.target.value)}
-                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
+                sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} 
+                disabled={isComputer}
               />
 
               <TextField
@@ -268,7 +309,8 @@ const OutflowsModal = ({ open, onClose }) => {
                 label="Longitud (-75.xxxx)"
                 value={longitud}
                 onChange={(e) => setLongitud(e.target.value)}
-                sx={{ width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
+                sx={{ width: 'calc(50% - 8px)' }}
+                disabled={isComputer}
               />
             </Box>
 
