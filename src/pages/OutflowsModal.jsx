@@ -183,7 +183,7 @@ const OutflowsModal = ({ open, onClose }) => {
 
 
             {/* Título "Datos de ubicación" */}
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant="datos_ubicacion" gutterBottom>
             Datos de ubicación:
           </Typography>
 
