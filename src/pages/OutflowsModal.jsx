@@ -21,6 +21,8 @@ const OutflowsModal = ({ open, onClose }) => {
   const [departamento, setDepartamento] = React.useState("");
   const [municipio, setMunicipio] = React.useState("");
   const [barrio, setBarrio] = React.useState("");
+  const [latitud, setLatitud] = React.useState("");
+  const [longitud, setLongitud] = React.useState("");
 
   const fetchArticleData = (searchTerm) => {
     if (searchTerm) {
@@ -158,7 +160,31 @@ const OutflowsModal = ({ open, onClose }) => {
               onChange={(e) => setBarrio(e.target.value)}
               sx={{ width: 'calc(33% - 8px)' }} // Ajuste del width para 3 campos
             />
+
           </Box>
+
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '16px' }}>
+  <TextField
+    fullWidth
+    margin="normal"
+    variant="outlined"
+    label="Latitud"
+    value={latitud}
+    onChange={(e) => setLatitud(e.target.value)}
+    sx={{ marginRight: '16px', width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
+  />
+
+  <TextField
+    fullWidth
+    margin="normal"
+    variant="outlined"
+    label="Longitud"
+    value={longitud}
+    onChange={(e) => setLongitud(e.target.value)}
+    sx={{ width: 'calc(50% - 8px)' }} // Ajuste del width para 2 campos
+  />
+</Box>
+
 
             {/* Campo de descripción */}
             <TextField
