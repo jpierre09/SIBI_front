@@ -1,25 +1,20 @@
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 import { getAdminApi } from '../../services/adminApi';
 
-const columns = [
-  { field: 'tipo_bien', headerName: 'Tipo de bien', width: 140 },
-  { field: 'articulo', headerName: 'Articulo', width: 230 },
-  { field: 'proveedor', headerName: 'Proveedor', width: 160 },
-  { field: 'cartera', headerName: 'Cartera', width: 120 },
-  { field: 'marca', headerName: 'Marca', width: 120 },
-  { field: 'referencia', headerName: 'Referencia', width: 190 },
-  { field: 'modelo', headerName: 'Modelo', width: 190 },
-  { field: 'moneda', headerName: 'Moneda', width: 90 },
-  { field: 'iva', headerName: 'IVA', width: 90 },
-  { field: 'ubicacion', headerName: 'Ubicación', width: 180 },
-  {
-    field: 'control_legalizable',
-    headerName: 'Control/Legalizable',
-    width: 140,
-  },
-];
+//
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+const styleTableCell = {
+  fontWeight: 'bold',
+};
 
 export default function DataTable() {
   const {
@@ -35,46 +30,114 @@ export default function DataTable() {
     ubicaciones,
   } = getAdminApi();
 
-  const mappedRows = activosFijos.map(activoFijo => ({
-    id: activoFijo.id,
-    tipo_bien: activoFijo.cantidad, //este campo no va acá
-    articulo: articulos.find(articulo => articulo.id === activoFijo.articulo)
-      .nombre,
-    proveedor: proveedores.find(
-      proveedor => proveedor.id === activoFijo.proveedor
-    ).nombre,
-    cartera: carteras.find(cartera => cartera.id === activoFijo.cartera).nombre,
-    marca: marcas.find(marca => marca.id === activoFijo.marca).nombre,
-    referencia: referencias.find(
-      referencia => referencia.id === activoFijo.referencia
-    ).nombre,
-    modelo: activoFijo.modelo,
-    moneda: monedas.find(moneda => moneda.id === activoFijo.moneda).tipo,
-    iva: ivas.find(iva => iva.id === activoFijo.iva).descripcion,
-    ubicacion: ubicaciones.find(
-      ubicacion => ubicacion.id === activoFijo.ubicacion
-    ).lugar,
-    control_legalizable: controles.find(
-      control => control.id === activoFijo.control
-    ).tipo,
-  }));
-
   return (
-    <Box
-      sx={{
-        margin: '10px',
-      }}>
-      <DataGrid
-        rows={mappedRows}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 5 },
-          },
-        }}
-        pageSizeOptions={[1, 3, 5]}
-        checkboxSelection
-      />
-    </Box>
+    <TableContainer component={Paper} sx={{ width: '89vw', margin: '1vh' }}>
+      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+        <TableHead>
+          <TableRow>
+            <TableCell align='center' sx={styleTableCell}>
+              ID
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              TIPO DE BIEN
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              ARTICULO
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              PROVEEDOR
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              CARTERA
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              MARCA
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              REFERENCIA
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              MODELO
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              MONEDA
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              IVA
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              UBICACION
+            </TableCell>
+            <TableCell align='center' sx={styleTableCell}>
+              CONTROL/LEGALIZABLE
+            </TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {activosFijos.map(activoFijo => (
+            <TableRow key={activoFijo.id}>
+              <TableCell component='th' scope='row'>
+                {activoFijo.id}
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {activoFijo.cantidad}
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {
+                  articulos.find(
+                    articulo => articulo.id === activoFijo.articulo
+                  ).nombre
+                }
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {
+                  proveedores.find(
+                    proveedor => proveedor.id === activoFijo.proveedor
+                  ).nombre
+                }
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {
+                  carteras.find(cartera => cartera.id === activoFijo.cartera)
+                    .nombre
+                }
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {marcas.find(marca => marca.id === activoFijo.marca).nombre}
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {
+                  referencias.find(
+                    referencia => referencia.id === activoFijo.referencia
+                  ).nombre
+                }
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {activoFijo.modelo}
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {monedas.find(moneda => moneda.id === activoFijo.moneda).tipo}
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {ivas.find(iva => iva.id === activoFijo.iva).descripcion}
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {
+                  ubicaciones.find(
+                    ubicacion => ubicacion.id === activoFijo.ubicacion
+                  ).lugar
+                }
+              </TableCell>
+              <TableCell component='th' scope='row'>
+                {
+                  controles.find(control => control.id === activoFijo.control)
+                    .tipo
+                }
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
