@@ -1,16 +1,24 @@
 import React from 'react';
-import { Box, Typography, TextField, Button } from '@mui/material';
+import { Box, Typography, TextField, Button, IconButton } from '@mui/material';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import VpnKey from '@mui/icons-material/VpnKey';
 import Inventory from '@mui/icons-material/Inventory';  // Ícono de inventario
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 
 const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [showPassword, setShowPassword] = React.useState(false); // Nuevo estado para mostrar/ocultar contraseña
 
   const handleSubmit = () => {
     onLogin(username, password);
+  };
+
+  const handleTogglePassword = () => {
+    setShowPassword(!showPassword); // Cambia el estado de mostrar/ocultar contraseña
   };
 
   return (
@@ -55,18 +63,26 @@ const LoginForm = ({ onLogin }) => {
           }}
         />
 
-        <TextField
+<TextField
           fullWidth
           margin="dense"
           variant="outlined"
           label="Contraseña"
-          type="password"
+          type={showPassword ? "text" : "password"} // Si showPassword es true, muestra la contraseña
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          sx={{ backgroundColor: '#f6f7fb' }}
+          sx={{ backgroundColor: '#f6f7fb', marginBottom: '24px' }}
           InputProps={{
             startAdornment: (
-              <VpnKey sx={{ color: "#f44336", marginRight: '10px' }} />
+              <VpnKey sx={{ color: "#184287", marginRight: '10px' }} />
+            ),
+            endAdornment: (  // Agrega un icono al final para mostrar/ocultar contraseña
+              <IconButton
+                edge="end"
+                onClick={handleTogglePassword}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
             ),
           }}
         />
