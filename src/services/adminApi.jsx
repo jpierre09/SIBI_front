@@ -60,7 +60,6 @@ export const getAdminApi = () => {
         console.log('Error fetching data: ', error);
       }
     }
-
     fetchData();
   }, []);
 
