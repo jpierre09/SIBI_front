@@ -1,17 +1,52 @@
 import React from 'react';
 import LoginForm from '../components/Login/LoginSibi';
+import axios from 'axios';
 
 const LoginPage = () => {
-  
+
   const handleLogin = (username, password) => {
-    // Lógica para el inicio de sesión
-    // Por ejemplo: llamar a una API, actualizar el estado global, etc.
-    console.log(`Intentando iniciar sesión con ${username} y ${password}`);
+    const csrftoken = getCookie('csrftoken');
+
+    axios.post('http://127.0.0.1:8000/api-auth/login/', {
+        username: username,
+        password: password
+    }, {
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken
+        },
+        withCredentials: true
+    })
+    .then(response => {
+        if (response.status === 200) {
+            console.log("Inicio de sesión exitoso:", response.data);
+            window.location.href = "/";
+            // console.log(username)
+        }
+    })
+    .catch(error => {
+        console.error("Error en el inicio de sesión:", error.response);
+        // console.log(username)
+    });
   };
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+  }
 
   return (
     <div>
-      {/* <h1>Página de inicio de sesión</h1> */}
       <LoginForm onLogin={handleLogin} />
     </div>
   );
