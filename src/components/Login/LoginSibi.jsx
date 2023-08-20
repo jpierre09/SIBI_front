@@ -3,9 +3,13 @@ import { Box, Typography, TextField, Button, IconButton } from '@mui/material';
 
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import VpnKey from '@mui/icons-material/VpnKey';
-import Inventory from '@mui/icons-material/Inventory';  // Ícono de inventario
+// import Inventory from '@mui/icons-material/Inventory';  // Ícono de inventario
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+// import logoSibi from '../../assets/Logos-SIATA_AMVA_Azul.png';
+import logoSibi from '../../assets/icono_sibi.png';
+
 
 
 const LoginForm = ({ onLogin }) => {
@@ -40,9 +44,18 @@ const LoginForm = ({ onLogin }) => {
       >
 
         {/* Ícono de inventario */}
-        <Box display="flex" justifyContent="center" marginBottom={4}>
+        {/* <Box display="flex" justifyContent="center" marginBottom={4}>
           <Inventory sx={{ fontSize: 60, color: "#184287" }} />
+        </Box> */}
+        <Box display="flex" justifyContent="center" marginBottom={2}>
+          <img
+            src={logoSibi}
+            alt="Logo SIBI"
+            style={{ maxWidth: '50%', height: 'auto' }}
+          />
         </Box>
+
+
         
         <Typography variant="h5" gutterBottom align="center" marginBottom={6}>
           Bienvenido a SIBI
