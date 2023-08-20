@@ -5,49 +5,42 @@ import axios from 'axios';
 const LoginPage = () => {
 
   const handleLogin = (username, password) => {
-    const csrftoken = getCookie('csrftoken');
-
-    axios.post('http://127.0.0.1:8000/api-auth/login/', {
+    axios.post('http://127.0.0.1:8000/api/token/', {
         username: username,
         password: password
     }, {
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
-        },
-        withCredentials: true
+        }
     })
     .then(response => {
         if (response.status === 200) {
             console.log("Inicio de sesión exitoso:", response.data);
+            localStorage.setItem('access_token', response.data.access);
+            localStorage.setItem('refresh_token', response.data.refresh);
             window.location.href = "/";
-            // console.log(username)
         }
     })
     .catch(error => {
-        console.error("Error en el inicio de sesión:", error.response);
-        // console.log(username)
+        if (error.response && error.response.status === 401) {
+            console.error("Credenciales inválidas.");
+        } else {
+            console.error("Error en el inicio de sesión:", error.response);
+        }
     });
   };
 
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
+  // Función para manejar el cierre de sesión
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    window.location.href = "/login";  // Redirige al usuario a la página de inicio de sesión
   }
 
   return (
     <div>
       <LoginForm onLogin={handleLogin} />
+      {/* Puedes añadir un botón o algún mecanismo para llamar a handleLogout cuando el usuario quiera cerrar sesión */}
     </div>
   );
 };
