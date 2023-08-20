@@ -61,7 +61,8 @@ export default function Home() {
             borderRadius: '16px',
             padding: '10px',
             boxShadow: '2px 1px 1px rgb(169,169,169, 0.7)',
-            gridArea: 'D'
+            gridArea: 'D',
+            height: '20vh',
           }}>
           <DoughnutChart />
         </Box>
