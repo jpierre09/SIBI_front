@@ -6,13 +6,14 @@ import VpnKey from '@mui/icons-material/VpnKey';
 // import Inventory from '@mui/icons-material/Inventory';  // Ícono de inventario
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Alert from '@mui/material/Alert';
 
 // import logoSibi from '../../assets/Logos-SIATA_AMVA_Azul.png';
 import logoSibi from '../../assets/icono_sibi.png';
 
 
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ onLogin, errorMessage }) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [showPassword, setShowPassword] = React.useState(false); // Nuevo estado para mostrar/ocultar contraseña
@@ -26,10 +27,10 @@ const LoginForm = ({ onLogin }) => {
   };
 
   return (
-    <Box 
-      display="flex" 
-      flexDirection="column" 
-      alignItems="center" 
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
       justifyContent="center"
       minHeight="100vh"
       bgcolor="#f4f5fa"
@@ -56,10 +57,16 @@ const LoginForm = ({ onLogin }) => {
         </Box>
 
 
-        
+
         <Typography variant="h5" gutterBottom align="center" marginBottom={6}>
           Bienvenido a SIBI
         </Typography>
+
+        {errorMessage && (
+          <Box mt={2}>
+            <Alert severity="error">{errorMessage}</Alert>
+          </Box>
+        )}
 
         <TextField
           fullWidth
@@ -76,7 +83,7 @@ const LoginForm = ({ onLogin }) => {
           }}
         />
 
-<TextField
+        <TextField
           fullWidth
           margin="dense"
           variant="outlined"
@@ -100,11 +107,11 @@ const LoginForm = ({ onLogin }) => {
           }}
         />
 
-        <Button 
-          variant="contained" 
-          sx={{ 
-            marginTop: '60px', 
-            backgroundColor: "#184287", 
+        <Button
+          variant="contained"
+          sx={{
+            marginTop: '60px',
+            backgroundColor: "#184287",
             '&:hover': { backgroundColor: "#133466" },
             display: 'block',
             marginLeft: 'auto',
@@ -114,6 +121,7 @@ const LoginForm = ({ onLogin }) => {
         >
           Ingresar
         </Button>
+        
       </Box>
     </Box>
   );

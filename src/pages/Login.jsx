@@ -4,6 +4,9 @@ import axios from 'axios';
 
 const LoginPage = () => {
 
+  const [loginError, setLoginError] = React.useState(null);
+
+
   const handleLogin = (username, password) => {
     axios.post('http://127.0.0.1:8000/api/token/', {
         username: username,
@@ -22,11 +25,8 @@ const LoginPage = () => {
         }
     })
     .catch(error => {
-        if (error.response && error.response.status === 401) {
-            console.error("Credenciales inválidas.");
-        } else {
-            console.error("Error en el inicio de sesión:", error.response);
-        }
+      setLoginError("Credenciales inválidas. Inténtalo de nuevo.");
+      console.error("Error en el inicio de sesión:", error.response);
     });
   };
 
@@ -39,7 +39,7 @@ const LoginPage = () => {
 
   return (
     <div>
-      <LoginForm onLogin={handleLogin} />
+      <LoginForm onLogin={handleLogin} errorMessage={loginError} />
       {/* Puedes añadir un botón o algún mecanismo para llamar a handleLogout cuando el usuario quiera cerrar sesión */}
     </div>
   );
