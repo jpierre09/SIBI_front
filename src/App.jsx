@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import { Income } from './pages/Income';
 import Home from './pages/Home';
 import { Outflows } from './pages/Outflows';
+import 'chart.js';
+
 
 function App() {
   return (
