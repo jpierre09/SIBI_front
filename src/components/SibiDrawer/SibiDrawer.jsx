@@ -25,6 +25,8 @@ import {
   ShoppingCart,
 } from '@mui/icons-material';
 
+
+
 const options = [
   {
     label: 'Dashboard', //cards de summary de categorys
@@ -147,6 +149,8 @@ export default function SibiDrawer() {
     setSelectedOption(label);
     setOpenSubMenu(false);
   };
+
+  
 
   const handleMainOptionClick = label => {
     const option = options.find(opt => opt.label === label);
