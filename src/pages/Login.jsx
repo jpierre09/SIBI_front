@@ -9,6 +9,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 export const handleLogout = () => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
+  localStorage.removeItem('username');
   window.location.href = "/loginSibi";  // Redirige al usuario a la página de inicio de sesión
 }
 
@@ -31,6 +32,7 @@ const LoginPage = () => {
             console.log("Inicio de sesión exitoso:", response.data);
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
+            localStorage.setItem('username', username); 
             window.location.href = "/";
         }
     })
