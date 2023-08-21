@@ -28,7 +28,6 @@ const AvatarMenu = () => {
       <IconButton onClick={handleClick}>
         <Avatar 
           alt={initial} // Aquí usamos la inicial
-          src="/path-to-your-image.jpg"
           sx={{ backgroundColor: '#184287', color: 'white' }}
         > 
           {initial} {/* Aquí mostramos la inicial en el Avatar */}
