@@ -1,6 +1,16 @@
 import React from 'react';
 import LoginForm from '../components/Login/LoginSibi';
 import axios from 'axios';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+
+
+
+// Función para manejar el cierre de sesión
+export const handleLogout = () => {
+  localStorage.removeItem('access_token');
+  localStorage.removeItem('refresh_token');
+  window.location.href = "/loginSibi";  // Redirige al usuario a la página de inicio de sesión
+}
 
 const LoginPage = () => {
 
@@ -30,12 +40,7 @@ const LoginPage = () => {
     });
   };
 
-  // Función para manejar el cierre de sesión
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    window.location.href = "/loginSibi";  // Redirige al usuario a la página de inicio de sesión
-  }
+  
 
   return (
     <div>
