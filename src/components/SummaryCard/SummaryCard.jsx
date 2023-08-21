@@ -3,21 +3,15 @@ import { Box, Typography } from '@mui/material';
 
 export default function SummaryCard(props) {
   return (
-    <Box
-      sx={{
-        width: '33vw',
-        height: '16vh',
-      }}
-    >
+    <Box>
       <Box
         sx={{
+          height: '18vh',
           borderRadius: '8px',
           backgroundColor: 'var(--primary-80)',
           padding: '20px',
-          margin: '10px',
           color: 'white',
-          height: '100%',
-          width: '100%'
+          boxShadow: '2px 1px 1px rgb(169,169,169, 0.7)',
         }}>
         <Box
           sx={{

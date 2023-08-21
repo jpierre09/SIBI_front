@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../layout/Layout';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import DoughnutChart from '../components/Chart/DoughnutChart';
 import BarsChart from '../components/Chart/BarsChart';
 import SummaryCard from '../components/SummaryCard/SummaryCard';
@@ -12,29 +12,22 @@ export default function Home() {
     <Layout>
       <Box
         sx={{
-          padding: '10vh 10vw',
+          padding: '10vh 6vw 3vh 6vw',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gridTemplateRows: '1fr 1fr 1fr',
           gridTemplateAreas: `
             'A B C'
             'D E F'
             'D G F'
             'H H F'
           `,
+          gap: '10px',
+          height: '100vh',
         }}>
-        <Box 
+        <Box
           sx={{
-            gridArea: 'A'
-          }}
-        >
-          <SummaryCard
-            title={'Prueba'}
-            optionOne={'Prueba'}
-            optionTwo={'Prueba'}
-            optionThree={'Prueba'}
-          />
-        </Box>
-        <Box 
-          sx={{
-            gridArea: 'B'
+            gridArea: 'A',
           }}>
           <SummaryCard
             title={'Prueba'}
@@ -43,9 +36,20 @@ export default function Home() {
             optionThree={'Prueba'}
           />
         </Box>
-        <Box 
+        <Box
           sx={{
-            gridArea: 'C'
+            gridArea: 'B',
+          }}>
+          <SummaryCard
+            title={'Prueba'}
+            optionOne={'Prueba'}
+            optionTwo={'Prueba'}
+            optionThree={'Prueba'}
+          />
+        </Box>
+        <Box
+          sx={{
+            gridArea: 'C',
           }}>
           <SummaryCard
             title={'Prueba'}
@@ -62,24 +66,12 @@ export default function Home() {
             padding: '10px',
             boxShadow: '2px 1px 1px rgb(169,169,169, 0.7)',
             gridArea: 'D',
-            height: '20vh',
           }}>
           <DoughnutChart />
         </Box>
-        <Box 
+        <Box
           sx={{
-            gridArea: 'E'
-          }}>
-          <SummaryCard
-            title={'Prueba'}
-            optionOne={'Prueba'}
-            optionTwo={'Prueba'}
-            optionThree={'Prueba'}
-          />
-        </Box>
-        <Box 
-          sx={{
-            gridArea: 'G'
+            gridArea: 'E',
           }}>
           <SummaryCard
             title={'Prueba'}
@@ -90,20 +82,34 @@ export default function Home() {
         </Box>
         <Box
           sx={{
-            background: 'black',
-            width: '26vw',
-            gridArea: 'F'
+            gridArea: 'G',
           }}>
-          as
+          <SummaryCard
+            title={'Prueba'}
+            optionOne={'Prueba'}
+            optionTwo={'Prueba'}
+            optionThree={'Prueba'}
+          />
         </Box>
         <Box
           sx={{
+            gridArea: 'F',
+            background: 'var(--primary-80)',
+            borderRadius: '8px',
+            boxShadow: '2px 1px 1px rgb(169,169,169, 0.7)',
+            color: 'white',
+          }}>
+          <Typography variant='h4'>Prueba</Typography>
+        </Box>
+        <Box
+          sx={{
+            // height: '30vh',
             background: 'white',
             border: 'solid 1px grey',
             borderRadius: '16px',
             padding: '10px',
             boxShadow: '2px 1px 1px rgb(169,169,169, 0.7)',
-            gridArea: 'H'
+            gridArea: 'H',
           }}>
           <BarsChart />
         </Box>
