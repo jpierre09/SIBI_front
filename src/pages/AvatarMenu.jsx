@@ -30,7 +30,7 @@ const AvatarMenu = () => {
           alt={initial} // Aquí usamos la inicial
           sx={{ backgroundColor: '#184287', color: 'white' }}
         > 
-          {initial} {/* Aquí mostramos la inicial en el Avatar */}
+          {initial} {/* inicial en el Avatar */}
         </Avatar>
       </IconButton>
       <Menu

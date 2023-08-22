@@ -36,11 +36,6 @@ const options = [
     url: '/',
   },
   {
-    label: 'Orders',
-    icon: <LocalMall />,
-    url: '/orders',
-  },
-  {
     label: 'Almacén',
     icon: <ShoppingCart />,
     subMenu: [
@@ -55,12 +50,17 @@ const options = [
     ],
   },
   {
-    label: 'Informes',
+    label: 'Estado de bienes',
+    icon: <LocalMall />,
+    url: '/tracking',
+  },
+  {
+    label: 'Reportes',
     icon: <AssessmentOutlined />,
     url: '/report',
   },
   {
-    label: 'Settings',
+    label: 'Panel Administrativo',
     icon: <Settings />,
     url: '/settings',
   },
