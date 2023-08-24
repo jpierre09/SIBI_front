@@ -20,7 +20,7 @@ const Reportes = () => {
                 renderInput={(startProps, endProps) => (
                     <>
                         <input {...startProps} placeholder="Fecha inicio" />
-                        <Box sx={{ mx: 2 }}> a </Box>
+                        <Box sx={{ mx: 4 }}> a </Box>
                         <input {...endProps} placeholder="Fecha fin" />
                     </>
                 )}

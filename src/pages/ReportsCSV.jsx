@@ -15,7 +15,7 @@ export default function Reportes() {
 
   return (
     <Layout>
-    <div style={{padding: '8vh 8vw'}}>
+    <div style={{padding: '10vh 8vw'}}>
       <h2>Generar Reporte</h2>
       <TextField
         label="Fecha de inicio"
