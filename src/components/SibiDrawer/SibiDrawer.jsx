@@ -24,7 +24,6 @@ import {
   Settings,
   ShoppingCart,
 } from '@mui/icons-material';
-import AvatarMenu from '../../pages/AvatarMenu';  
 
 
 
@@ -190,7 +189,6 @@ export default function SibiDrawer() {
           <Typography variant='h6' noWrap component='div' sx={{ flexGrow: 1 }}>
             {selectedOption}
           </Typography>
-          <AvatarMenu />
         </Toolbar>
 
       </AppBar>

@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import LoginForm from '../components/Login/LoginSibi';
-import { handleLogin } from '../services/loginApi';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
-
+import axios from 'axios';
 
 // Función para manejar el cierre de sesión
 export const handleLogout = () => {
@@ -14,17 +11,7 @@ export const handleLogout = () => {
 }
 
 const LoginPage = () => {
-  const [loginError, setLoginError] = useState(null);
 
-  const handleUserLogin = async (username, password) => {
-    try {
-      await handleLogin(username, password, setLoginError);
-    } catch (error) {
-      console.error('Error en el manejo del inicio de sesión.', error);
-      setLoginError(
-        'Hubo un error en el inicio de sesión. Por favor, inténtalo de nuevo.'
-      );
-    }
   const [loginError, setLoginError] = React.useState(null);
 
 
@@ -52,12 +39,6 @@ const LoginPage = () => {
     });
   };
 
-  // Función para manejar el cierre de sesión
-  const handleLogout = async () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    window.location.href = '/login'; // Redirige al usuario a la página de inicio de sesión
-  };
   
 
   return (
