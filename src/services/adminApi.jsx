@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getAccessToken, getRefreshToken } from './loginApi';
 
 export const getAdminApi = () => {
   const [activosFijos, setActivosFijos] = useState([]);
@@ -13,38 +14,56 @@ export const getAdminApi = () => {
   const [referencias, setReferencias] = useState([]);
   const [ubicaciones, setUbicaciones] = useState([]);
 
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
+
   useEffect(() => {
     async function fetchData() {
       try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        };
         const activosFijosResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/ActivosFijos/'
+          'http://127.0.0.1:8000/SIBI/ActivosFijos/',
+          config
         );
         const articulosResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/articulos/'
+          'http://127.0.0.1:8000/SIBI/articulos/',
+          config
         );
         const carterasResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/cartera/'
+          'http://127.0.0.1:8000/SIBI/cartera/',
+          config
         );
         const controlesResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/control/'
+          'http://127.0.0.1:8000/SIBI/control/',
+          config
         );
         const ivasResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/iva/'
+          'http://127.0.0.1:8000/SIBI/iva/',
+          config
         );
         const marcasResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/marca/'
+          'http://127.0.0.1:8000/SIBI/marca/',
+          config
         );
         const monedasResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/moneda/'
+          'http://127.0.0.1:8000/SIBI/moneda/',
+          config
         );
         const proveedoresResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/proveedor/'
+          'http://127.0.0.1:8000/SIBI/proveedor/',
+          config
         );
         const referenciasResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/referencia/'
+          'http://127.0.0.1:8000/SIBI/referencia/',
+          config
         );
         const ubicacionesResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/ubicacion/'
+          'http://127.0.0.1:8000/SIBI/ubicacion/',
+          config
         );
         setActivosFijos(activosFijosResponse.data);
         setArticulos(articulosResponse.data);
@@ -57,11 +76,24 @@ export const getAdminApi = () => {
         setReferencias(referenciasResponse.data);
         setUbicaciones(ubicacionesResponse.data);
       } catch (error) {
-        console.log('Error fetching data: ', error);
+        if (error.response && error.response.status === 401 && refreshToken) {
+          try {
+            const refreshResponse = await axios.post(
+              'http://127.0.0.1:8000/api/token/refresh/',
+              {
+                refresh: refreshToken,
+              }
+            );
+          } catch (refreshError) {
+            console.log('Error al refrescar el token: ', refreshError);
+          }
+        } else {
+          console.log('Error al obtener el token: ', error);
+        }
       }
     }
     fetchData();
-  }, []);
+  }, [accessToken, refreshToken]);
 
   return {
     activosFijos,

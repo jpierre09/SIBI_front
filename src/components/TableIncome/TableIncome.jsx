@@ -80,7 +80,7 @@ export default function DataTable() {
                 {activoFijo.id}
               </TableCell>
               <TableCell component='th' scope='row'>
-                {activoFijo.cantidad}
+                {activoFijo.id}
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
