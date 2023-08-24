@@ -9,7 +9,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Alert from '@mui/material/Alert';
 
 // import logoSibi from '../../assets/Logos-SIATA_AMVA_Azul.png';
-// import logoSibi from '../../assets/icono_sibi.png';
+import logoSibi from '../../assets/icono_sibi.png';
 
 
 
@@ -49,11 +49,11 @@ const LoginForm = ({ onLogin, errorMessage }) => {
           <Inventory sx={{ fontSize: 60, color: "#184287" }} />
         </Box> */}
         <Box display="flex" justifyContent="center" marginBottom={2}>
-          {/* <img
+          <img
             src={logoSibi}
             alt="Logo SIBI"
             style={{ maxWidth: '50%', height: 'auto' }}
-          /> */}
+          />
         </Box>
 
 
