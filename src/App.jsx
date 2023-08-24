@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import { Outflows } from './pages/Outflows';
 import 'chart.js';
 import LoginPage from './pages/Login';
+import Reportes  from './pages/ReportsCSV'
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Route path='/' element={<Home />} />
       <Route path='/income' element={<Income />} />
       <Route path='/outflows' element={<Outflows />} />
-      {/* <Route path='/report' element={<Reportes />} /> */}
+      <Route path='/report' element={<Reportes />} />
     </Routes>
   );
 }

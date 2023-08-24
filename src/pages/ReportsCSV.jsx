@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Layout from '../layout/Layout';
+import { Padding } from '@mui/icons-material';
 
 export default function Reportes() {
   const [startDate, setStartDate] = useState(null);
@@ -12,7 +14,8 @@ export default function Reportes() {
   };
 
   return (
-    <div>
+    <Layout>
+    <div style={{padding: '8vh 8vw'}}>
       <h2>Generar Reporte</h2>
       <TextField
         label="Fecha de inicio"
@@ -36,6 +39,7 @@ export default function Reportes() {
         Generar reporte
       </Button>
     </div>
+    </Layout>
   );
 }
 
