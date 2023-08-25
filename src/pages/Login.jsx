@@ -40,7 +40,7 @@ const LoginPage = () => {
             localStorage.setItem('access_token', response.data.access);
             localStorage.setItem('refresh_token', response.data.refresh);
             localStorage.setItem('username', username);
-            window.location.href = "/";
+            window.location.href = "/home";
         }
     })
     .catch(error => {

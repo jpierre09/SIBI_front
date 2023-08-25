@@ -10,8 +10,9 @@ import Reportes  from './pages/ReportsCSV'
 function App() {
   return (
     <Routes>
-      <Route path="/loginSibi" element={<LoginPage />} />
-      <Route path='/' element={<Home />} />
+      <Route path="/" element={<LoginPage />} />
+      <Route path='*' element={NotFound} />
+      <Route path='/home' element={<Home />} />
       <Route path='/income' element={<Income />} />
       <Route path='/outflows' element={<Outflows />} />
       <Route path='/report' element={<Reportes />} />
@@ -20,3 +21,7 @@ function App() {
 }
 
 export default App;
+
+function NotFound(){
+  return <>Ha llegado a una página que no existe</>
+}
