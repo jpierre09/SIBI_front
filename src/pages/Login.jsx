@@ -7,7 +7,7 @@ export const handleLogout = () => {
   localStorage.removeItem('access_token');
   localStorage.removeItem('refresh_token');
   localStorage.removeItem('username');
-  window.location.href = "/loginSibi";  // Redirige al usuario a la página de inicio de sesión
+  window.location.href = "/";  // Redirige al usuario a la página de inicio de sesión
 }
 
 const LoginPage = () => {
