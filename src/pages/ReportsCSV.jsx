@@ -1,44 +1,14 @@
-import React, { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import React from 'react';
 import Layout from '../layout/Layout';
-import { Padding } from '@mui/icons-material';
+import Reports from '../components/Reports/Reports';  // Asegúrate de ajustar la ruta si tu componente está en otra ubicación
 
-export default function Reportes() {
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-
-  const handleGenerateReport = () => {
-    // Aquí puedes agregar la lógica para generar el reporte en formato CSV
-    alert('Generando reporte desde ' + startDate + ' hasta ' + endDate);
-  };
-
+export default function ReportesCSV() {
   return (
     <Layout>
-    <div style={{padding: '10vh 8vw'}}>
-      <h2>Generar Reporte</h2>
-      <TextField
-        label="Fecha de inicio"
-        type="date"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <TextField
-        label="Fecha final"
-        type="date"
-        value={endDate}
-        onChange={(e) => setEndDate(e.target.value)}
-        InputLabelProps={{
-          shrink: true,
-        }}
-      />
-      <Button variant="contained" color="primary" onClick={handleGenerateReport}>
-        Generar reporte
-      </Button>
-    </div>
+      <div style={{ padding: '10vh 8vw' }}>
+        <h2>Generar Reporte</h2>
+        <Reports /> {/* Aquí estás utilizando el componente Reports */}
+      </div>
     </Layout>
   );
 }

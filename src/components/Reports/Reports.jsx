@@ -1,30 +1,31 @@
 import React, { useState } from 'react';
-import { Button, Box } from '@mui/material';
+import { Button, Box, Divider, TextField } from '@mui/material';
 import { DateRangePicker } from '@mui/lab';
 
-const Reportes = () => {
+const Reports = () => {
     const [dateRange, setDateRange] = useState([null, null]);
 
     const handleGenerateReport = () => {
-        // Lógica para generar el reporte basado en dateRange
         console.log('Generar reporte para las fechas:', dateRange);
     };
 
     return (
-        <Box>
-            <DateRangePicker
-                startText="Fecha inicio"
-                endText="Fecha fin"
-                value={dateRange}
-                onChange={(newValue) => setDateRange(newValue)}
-                renderInput={(startProps, endProps) => (
-                    <>
-                        <input {...startProps} placeholder="Fecha inicio" />
-                        <Box sx={{ mx: 4 }}> a </Box>
-                        <input {...endProps} placeholder="Fecha fin" />
-                    </>
-                )}
-            />
+        <Box display="flex" flexDirection="column" alignItems="center">
+            <Box display="flex" alignItems="center">
+                <DateRangePicker
+                    startText="Fecha inicio"
+                    endText="Fecha fin"
+                    value={dateRange}
+                    onChange={(newValue) => setDateRange(newValue)}
+                    renderInput={(startProps, endProps) => (
+                        <>
+                            <TextField {...startProps} helperText="" variant="outlined" margin="normal" style={{ marginRight: '10px' }} />
+                            <Divider orientation="vertical" flexItem style={{ height: '2rem', margin: '0 10px' }} />
+                            <TextField {...endProps} helperText="" variant="outlined" margin="normal" style={{ marginLeft: '10px' }} />
+                        </>
+                    )}
+                />
+            </Box>
 
             <Button 
                 variant="contained" 
@@ -38,4 +39,6 @@ const Reportes = () => {
     );
 };
 
-export default Reportes;
+export default Reports;
+
+
