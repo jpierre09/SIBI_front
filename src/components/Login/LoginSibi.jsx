@@ -9,7 +9,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Alert from '@mui/material/Alert';
 
 // import logoSibi from '../../assets/Logos-SIATA_AMVA_Azul.png';
-import logoSibi from '../../assets/icono_sibi.png';
+import logoSibi from '../../assets/carp.png';
 
 
 
