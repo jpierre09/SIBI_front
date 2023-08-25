@@ -3,7 +3,7 @@ import axios from 'axios';
 import { getAccessToken, getRefreshToken } from './loginApi';
 
 export const getAdminApi = () => {
-  const [activosFijos, setActivosFijos] = useState([]);
+  const [listasTotales, setListasTotales] = useState([]);
   const [articulos, setArticulos] = useState([]);
   const [carteras, setCarteras] = useState([]);
   const [controles, setControles] = useState([]);
@@ -25,8 +25,8 @@ export const getAdminApi = () => {
             Authorization: `Bearer ${accessToken}`,
           },
         };
-        const activosFijosResponse = await axios.get(
-          'http://127.0.0.1:8000/SIBI/ActivosFijos/',
+        const listasTotalesResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/listaTotal/',
           config
         );
         const articulosResponse = await axios.get(
@@ -65,7 +65,7 @@ export const getAdminApi = () => {
           'http://127.0.0.1:8000/SIBI/ubicacion/',
           config
         );
-        setActivosFijos(activosFijosResponse.data);
+        setListasTotales(listasTotalesResponse.data);
         setArticulos(articulosResponse.data);
         setCarteras(carterasResponse.data);
         setControles(controlesResponse.data);
@@ -96,7 +96,7 @@ export const getAdminApi = () => {
   }, [accessToken, refreshToken]);
 
   return {
-    activosFijos,
+    listasTotales,
     articulos,
     carteras,
     controles,
