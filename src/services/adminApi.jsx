@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getAccessToken, getRefreshToken } from './loginApi';
 
+const accessToken = getAccessToken();
+const refreshToken = getRefreshToken();
+
 export const getAdminApi = () => {
   const [listasTotales, setListasTotales] = useState([]);
   const [articulos, setArticulos] = useState([]);
@@ -13,9 +16,6 @@ export const getAdminApi = () => {
   const [proveedores, setProveedores] = useState([]);
   const [referencias, setReferencias] = useState([]);
   const [ubicaciones, setUbicaciones] = useState([]);
-
-  const accessToken = getAccessToken();
-  const refreshToken = getRefreshToken();
 
   useEffect(() => {
     async function fetchData() {
@@ -106,5 +106,123 @@ export const getAdminApi = () => {
     proveedores,
     referencias,
     ubicaciones,
+  };
+};
+
+export const getPorcentajeConsumiblesCatg = () => {
+  const [porcentajesConsumiblesCatgs, setPorcentajesConsumiblesCatgs] =
+    useState({
+      categorias: [],
+      porcentajes: [],
+    });
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        };
+        const porcentajesConsumiblesCatgsResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/PorcentajeConsumiblesPorCategoria/',
+          config
+        );
+        const data =
+          porcentajesConsumiblesCatgsResponse.data.porcentaje_por_categoria;
+        const categorias = data.map(item => item.categoria);
+        const porcentajes = data.map(item => item.porcentaje);
+        setPorcentajesConsumiblesCatgs({
+          categorias,
+          porcentajes,
+        });
+      } catch (error) {
+        if (error.response && error.response.status === 401 && refreshToken) {
+          try {
+            const refreshResponse = await axios.post(
+              'http://127.0.0.1:8000/api/token/refresh/',
+              {
+                refresh: refreshToken,
+              }
+            );
+          } catch (refreshError) {
+            console.log('Error al refrescar el token: ', refreshError);
+          }
+        } else {
+          console.log('Error al obtener el token: ', error);
+        }
+      }
+    }
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  return porcentajesConsumiblesCatgs;
+};
+
+export const getTotalPorRed = () => {
+  const [activosFijos, setActivosFijos] = useState([]);
+  const [carteras, setCarteras] = useState([]);
+  const [cantidadRiesgos, setCantidadRiesgos] = useState(0);
+  const [cantidadAire, setCantidadAire] = useState(0);
+  const [cantidadAireRiesgos, setCantidadAireRiesgos] = useState(0);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        };
+        const activosFijosResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/ActivosFijos/',
+          config
+        );
+        const carterasResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/cartera/',
+          config
+        );
+        setActivosFijos(activosFijosResponse.data);
+        setCarteras(carterasResponse.data);
+
+        const riesgosCount = carterasResponse.data.filter(
+          item => item.nombre === 'Riesgos'
+        ).length;
+        const aireCount = carterasResponse.data.filter(
+          item => item.nombre === 'Aire'
+        ).length;
+        const aireRiesgosCount = carterasResponse.data.filter(
+          item => item.nombre === 'Aire/Riesgos'
+        ).length;
+
+        setCantidadRiesgos(riesgosCount);
+        setCantidadAire(aireCount);
+        setCantidadAireRiesgos(aireRiesgosCount);
+      } catch (error) {
+        if (error.response && error.response.status === 401 && refreshToken) {
+          try {
+            const refreshResponse = await axios.post(
+              'http://127.0.0.1:8000/api/token/refresh/',
+              {
+                refresh: refreshToken,
+              }
+            );
+          } catch (refreshError) {
+            console.log('Error al refrescar el token: ', refreshError);
+          }
+        } else {
+          console.log('Error al obtener el token: ', error);
+        }
+      }
+    }
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  return {
+    activosFijos,
+    carteras,
+    cantidadRiesgos,
+    cantidadAire,
+    cantidadAireRiesgos,
   };
 };
