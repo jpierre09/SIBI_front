@@ -17,6 +17,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import SearchIcon from '@mui/icons-material/Search';
+import StorageIcon from '@mui/icons-material/Storage';
 import {
   AssessmentOutlined,
   Dashboard,
@@ -37,7 +39,7 @@ const options = [
   },
   {
     label: 'Almacén',
-    icon: <ShoppingCart />,
+    icon: <StorageIcon />,
     subMenu: [
       {
         item: 'Ingresos', //primero, fijos y consumibles***
@@ -51,7 +53,7 @@ const options = [
   },
   {
     label: 'Estado de bienes',
-    icon: <LocalMall />,
+    icon: <SearchIcon />,
     url: '/tracking',
   },
   {
