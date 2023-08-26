@@ -19,12 +19,15 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import SearchIcon from '@mui/icons-material/Search';
 import StorageIcon from '@mui/icons-material/Storage';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+
+
+
 import {
   AssessmentOutlined,
   Dashboard,
-  LocalMall,
   Settings,
-  ShoppingCart,
 } from '@mui/icons-material';
 import AvatarMenu from '../../pages/AvatarMenu';  
 
@@ -44,10 +47,12 @@ const options = [
       {
         item: 'Ingresos', //primero, fijos y consumibles***
         url: '/income',
+        icon: <ArrowDownwardIcon />,  
       },
       {
         item: 'Egresos',
         url: '/outflows',
+        icon: <ArrowUpwardIcon />,
       },
     ],
   },
@@ -271,40 +276,50 @@ export default function SibiDrawer() {
               </ListItem>
               {subMenu && openSubMenu && selectedOption === label && (
                 <List>
-                  {subMenu.map(({ item, url: subMenuUrl }) => (
+                  {subMenu.map(({ item, url: subMenuUrl, icon: subMenuIcon }) => (
                     <ListItem
-                      button
-                      key={item}
-                      onClick={() => handleOptionClick(item)}
-                      disablePadding
+                    button
+                    key={item}
+                    onClick={() => handleOptionClick(item)}
+                    disablePadding
+                    sx={{
+                      display: 'block',
+                      borderRadius: '8px',
+                      backgroundColor:
+                        selectedOption === item
+                          ? 'var(--primary-100)'
+                          : 'white',
+                      color: selectedOption === item ? 'white' : 'inherit',
+                      '& .MuiListItemIcon-root': {
+                        color: selectedOption === item ? 'white' : 'grey',
+                        display: open ? 'block' : 'none', // Ocultar cuando Drawer está cerrado
+                      },
+                    }}>
+                    <ListItemButton
                       sx={{
-                        display: 'block',
-                        borderRadius: '8px',
-                        backgroundColor:
-                          selectedOption === item
-                            ? 'var(--primary-100)'
-                            : 'white',
-                        color: selectedOption === item ? 'white' : 'inherit',
-                        '& .MuiListItemIcon-root': {
-                          color: selectedOption === item ? 'white' : 'grey',
-                        },
+                        minHeight: 48,
+                        justifyContent: open ? 'initial' : 'center',  // Centrar cuando Drawer está cerrado
+                        px: 4,
                       }}>
-                      <ListItemButton
-                        sx={{
-                          minHeight: 48,
-                          justifyContent: open ? 'initial' : 'center',
-                          px: 4,
+                      <Link
+                        to={subMenuUrl}
+                        style={{
+                          textDecoration: 'none',
+                          display: 'flex',
+                          justifyContent: open ? 'flex-start' : 'center', // Centrar cuando Drawer está cerrado
                         }}>
-                        <Link
-                          to={subMenuUrl}
-                          style={{ textDecoration: 'none' }}>
-                          <ListItemText
-                            primary={item}
-                            sx={{ opacity: open ? 1 : 0 }}
-                          />
-                        </Link>
-                      </ListItemButton>
-                    </ListItem>
+                        {subMenuIcon && <ListItemIcon>{subMenuIcon}</ListItemIcon>}
+                        <ListItemText
+                          primary={item}
+                          sx={{
+                            opacity: open ? 1 : 0,  // Ocultar cuando Drawer está cerrado
+                            textAlign: open ? 'left' : 'center',  // Centrar cuando Drawer está cerrado
+                          }}
+                        />
+                      </Link>
+                    </ListItemButton>
+                  </ListItem>
+                  
                   ))}
                 </List>
               )}
