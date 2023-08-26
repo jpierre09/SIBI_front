@@ -1,44 +1,62 @@
 import React, { useState } from 'react';
-import { Button, Box, Divider, TextField } from '@mui/material';
-import { DateRangePicker } from '@mui/lab';
+import { Button, Box, TextField, Typography } from '@mui/material';
 
 const Reports = () => {
-    const [dateRange, setDateRange] = useState([null, null]);
+    const [selectedDate, setSelectedDate] = useState('');
 
     const handleGenerateReport = () => {
-        console.log('Generar reporte para las fechas:', dateRange);
+        console.log('Generar reporte para la fecha:', selectedDate);
     };
 
     return (
         <Box display="flex" flexDirection="column" alignItems="center">
-            <Box display="flex" alignItems="center">
-                <DateRangePicker
-                    startText="Fecha inicio"
-                    endText="Fecha fin"
-                    value={dateRange}
-                    onChange={(newValue) => setDateRange(newValue)}
-                    renderInput={(startProps, endProps) => (
-                        <>
-                            <TextField {...startProps} helperText="" variant="outlined" margin="normal" style={{ marginRight: '10px' }} />
-                            <Divider orientation="vertical" flexItem style={{ height: '2rem', margin: '0 10px' }} />
-                            <TextField {...endProps} helperText="" variant="outlined" margin="normal" style={{ marginLeft: '10px' }} />
-                        </>
-                    )}
+            <Box display="flex" alignItems="center" sx={{ width: '100%', justifyContent: 'flex-start' }}>
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    label="Fecha inicio"
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    sx={{ width: 'calc(10%)' }}
+                />
+                <Typography variant="body1" sx={{ margin:'0 8px'}}> 
+                    hasta
+                </Typography>
+
+                <TextField
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    label="Fecha inicio"
+                    type="date"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    sx={{ width: 'calc(10%)' }}
                 />
             </Box>
 
-            <Button 
-                variant="contained" 
-                color="primary" 
-                onClick={handleGenerateReport}
-                sx={{ mt: 2 }}
-            >
-                Generar reporte
-            </Button>
+
+            <Box display="flex" justifyContent="flex-start" width="100%">
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={handleGenerateReport}
+                    sx={{ mt: 1 }}
+                >
+                    Generar reporte
+                </Button>
+            </Box>
         </Box>
     );
 };
 
 export default Reports;
-
 

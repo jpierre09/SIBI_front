@@ -39,7 +39,7 @@ export default function BarsChart() {
       },
       title: {
         display: true,
-        text: 'Cantidad de Activos fijos por red',
+        text: 'Cantidad de Activos fijos por cartera',
         font: {
           size: 20,
         }
