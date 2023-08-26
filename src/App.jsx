@@ -9,7 +9,7 @@ import Reportes  from './pages/ReportsCSV'
 import NotFound from './pages/NotFound';
 
 function App() {
-  return (
+  return (    
     <Routes>
       <Route path="/" element={<LoginPage />} />      
       <Route path='/home' element={<Home />} />
