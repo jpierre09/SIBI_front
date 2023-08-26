@@ -39,8 +39,8 @@ const Reports = () => {
             <Box sx={{ width: '100%', justifyContent: 'flex-start', marginBottom: '8px' }}>
                 <FormControl component="fieldset">
                     <RadioGroup row value={reportType} onChange={(e) => setReportType(e.target.value)}>
-                        <FormControlLabel value="ingreso" control={<Radio />} label="Ingresos" />
-                        <FormControlLabel value="egreso" control={<Radio />} label="Egresos" />
+                        <FormControlLabel value="ingresos" control={<Radio />} label="Ingresos" />
+                        <FormControlLabel value="egresos" control={<Radio />} label="Egresos" />
                     </RadioGroup>
                 </FormControl>
             </Box>
