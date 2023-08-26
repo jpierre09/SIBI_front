@@ -103,7 +103,7 @@ export default function Home() {
         </Box>
         <Box
           sx={{
-            // height: '30vh',
+            height: '30vh',
             background: 'white',
             border: 'solid 1px grey',
             borderRadius: '16px',
