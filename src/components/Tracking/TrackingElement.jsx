@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Button, Box, TextField, Typography } from '@mui/material';
 
 const Tracking = () => {
-    const [searchQuery, setSearchQuery] = useState('');  // Nuevo estado para la consulta de búsqueda
-    const [notFound, setNotFound] = useState(false); // Nuevo estado para manejar si el bien no se encontró
+    const [searchQuery, setSearchQuery] = useState('');  
+    const [notFound, setNotFound] = useState(false);  
 
     const handleSearch = () => {
         console.log('Buscar eventos para:', searchQuery);
 
-        // Simulación de una búsqueda fallida, debes reemplazar este bloque por tu llamada a API real
+        // Simulación de una búsqueda fallida
         if (searchQuery !== 'encontrado') {
             setNotFound(true);
         } else {
@@ -34,7 +34,6 @@ const Tracking = () => {
                 />
             </Box>
 
-            {/* Mostrar mensaje si no se encontró el bien */}
             {notFound && (
                 <Typography variant="body2" color="error" sx={{ mt: 2 }}>
                     No se encontró el bien.

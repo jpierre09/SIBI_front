@@ -75,9 +75,9 @@ export default function DataTable() {
         </TableHead>
         <TableBody>
           {listasTotales.map(listaTotal => (
-            <TableRow key={listaTotal.id}>
+            <TableRow key={listaTotal.fake_id}>
               <TableCell component='th' scope='row'>
-                {listaTotal.id}
+                {listaTotal.fake_id}
               </TableCell>
               <TableCell component='th' scope='row'>
                 {listaTotal.tipo_activo}
