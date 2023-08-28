@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Box, TextField, Typography, RadioGroup, FormControlLabel, Radio, FormControl, Tooltip } from '@mui/material';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import { CircularProgress } from '@mui/material';
+
 
 const Reports = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [reportType, setReportType] = useState('ingreso');
     const [validDateRange, setValidDateRange] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
 
     useEffect(() => {
         if (startDate && endDate) {
@@ -22,38 +26,33 @@ const Reports = () => {
         }
     }, [startDate, endDate]);
 
-    const handleGenerateReport = () => {
+    const handleGenerateReport = async () => {
         if (!startDate || !endDate) {
             alert('Ambas fechas son obligatorias.');
             return;
         }
         
         if (validDateRange) {
+            setIsLoading(true);  // Inicia la carga
+    
             let url;
             if (reportType === 'ingresos') {
-            url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
-            } else if (reportType ==='egresos') {
-                //Esta será la url del generador de egresos, por defecto está el de ingresos hasta que se cree egresos
                 url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
+            } else if (reportType === 'egresos') {
+                url = `http://127.0.0.1:8000/SIBI/downloadcsv_report_egresos/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
             }
+    
+            // Genera un retreso de 4 segundos antes de lanzar la consulta 
+            await new Promise(resolve => setTimeout(resolve, 4000));  
+            
             window.open(url, '_blank');
+    
+            setIsLoading(false);  
         } else {
             alert('El rango de fechas no puede ser mayor a un mes.');
         }
     };
-
-    // const handleGenerateReport = () => {
-    //     if (!startDate || !endDate) {
-    //         alert('Ambas fechas son obligatorias.');
-    //         return;
-    //     }
-        
-    //     if (validDateRange) {
-    //         console.log(`Generar reporte de tipo ${reportType} desde ${startDate} hasta ${endDate}`);
-    //     } else {
-    //         alert('El rango de fechas no puede ser mayor a un mes.');
-    //     }
-    // };
+    
 
     return (
         <Box display="flex" flexDirection="row">
@@ -110,7 +109,9 @@ const Reports = () => {
                         sx={{ mt: 4 }}
                     >
                         Generar reporte
+                        
                     </Button>
+                    {isLoading ? <CircularProgress sx={{ ml: 2 }} /> : null}
                 </Box>
             </Box>
             <Box display="flex" flexDirection="column" alignItems="center" flexGrow={1} style={{backgroundColor: '#f0f0f0', padding: '1rem'}}>
@@ -121,6 +122,7 @@ const Reports = () => {
                 </Typography>
                 <Typography variant="body1" style={{marginTop: '1rem'}}>1. Las consultas generadas aquí no pueden ser mayores a 31 días.</Typography>
                 <Typography variant="body1">2. El reporte se descargará en formato CSV (excel).</Typography>
+                <Typography variant="body1">3. Dependiendo de los movimientos del mes, puede tardar en generar el reporte.</Typography>
             </Box>
         </Box>
     );
