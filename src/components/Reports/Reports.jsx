@@ -33,6 +33,7 @@ const Reports = () => {
             if (reportType === 'ingresos') {
             url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
             } else if (reportType ==='egresos') {
+                //Esta será la url del generador de egresos, por defecto está el de ingresos hasta que se cree egresos
                 url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
             }
             window.open(url, '_blank');
