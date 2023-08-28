@@ -14,7 +14,7 @@ const Reports = () => {
             const end = new Date(endDate);
             const diffTime = Math.abs(end - start);
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-            if (diffDays > 30) {
+            if (diffDays > 31) {
                 setValidDateRange(false);
             } else {
                 setValidDateRange(true);
