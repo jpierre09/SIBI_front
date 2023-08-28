@@ -60,7 +60,7 @@ const Reports = () => {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        sx={{ width: 'calc(15%)' }}
+                        sx={{ width: 'calc(18%)' }}
                     />
                     <Typography variant="body1" sx={{ margin: '0 8px' }}> 
                         hasta
@@ -77,7 +77,7 @@ const Reports = () => {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        sx={{ width: 'calc(15%)' }}
+                        sx={{ width: 'calc(18%)' }}
                     />
                 </Box>
 
