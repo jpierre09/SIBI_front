@@ -29,11 +29,25 @@ const Reports = () => {
         }
         
         if (validDateRange) {
-            console.log(`Generar reporte de tipo ${reportType} desde ${startDate} hasta ${endDate}`);
+            const url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
+            window.open(url, '_blank');
         } else {
             alert('El rango de fechas no puede ser mayor a un mes.');
         }
     };
+
+    // const handleGenerateReport = () => {
+    //     if (!startDate || !endDate) {
+    //         alert('Ambas fechas son obligatorias.');
+    //         return;
+    //     }
+        
+    //     if (validDateRange) {
+    //         console.log(`Generar reporte de tipo ${reportType} desde ${startDate} hasta ${endDate}`);
+    //     } else {
+    //         alert('El rango de fechas no puede ser mayor a un mes.');
+    //     }
+    // };
 
     return (
         <Box display="flex" flexDirection="row">
@@ -82,9 +96,9 @@ const Reports = () => {
                 </Box>
 
                 <Box display="flex" justifyContent="flex-start" width="100%">
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
+                    <Button
+                        variant="contained"
+                        color="primary"
                         onClick={handleGenerateReport}
                         disabled={!validDateRange}
                         sx={{ mt: 4 }}
