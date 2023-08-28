@@ -29,7 +29,12 @@ const Reports = () => {
         }
         
         if (validDateRange) {
-            const url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
+            let url;
+            if (reportType === 'ingresos') {
+            url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
+            } else if (reportType ==='egresos') {
+                url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
+            }
             window.open(url, '_blank');
         } else {
             alert('El rango de fechas no puede ser mayor a un mes.');
