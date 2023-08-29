@@ -10,15 +10,15 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { getAdminApi } from '../../services/adminApi';
+import { getActivosFijosApi } from '../../services/adminApi';
 
 const styleTableCell = {
   fontWeight: 'bold',
 };
 
-export default function DataTable() {
+export default function TableIncomeActivosFijos() {
   const {
-    listasTotales,
+    activosFijos,
     articulos,
     carteras,
     controles,
@@ -28,7 +28,7 @@ export default function DataTable() {
     proveedores,
     referencias,
     ubicaciones,
-  } = getAdminApi();
+  } = getActivosFijosApi();
 
   return (
     <TableContainer component={Paper} sx={{ width: '89vw', margin: '1vh' }}>
@@ -37,9 +37,6 @@ export default function DataTable() {
           <TableRow>
             <TableCell align='center' sx={styleTableCell}>
               ID
-            </TableCell>
-            <TableCell align='center' sx={styleTableCell}>
-              TIPO DE BIEN
             </TableCell>
             <TableCell align='center' sx={styleTableCell}>
               ARTICULO
@@ -74,63 +71,62 @@ export default function DataTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {listasTotales.map(listaTotal => (
-            <TableRow key={listaTotal.id}>
+          {activosFijos.map(activosFijos => (
+            <TableRow key={activosFijos.id}>
               <TableCell component='th' scope='row'>
-                {listaTotal.id}
-              </TableCell>
-              <TableCell component='th' scope='row'>
-                {listaTotal.tipo_activo}
+                {activosFijos.id}
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
                   articulos.find(
-                    articulo => articulo.id === listaTotal.articulo
+                    articulo => articulo.id === activosFijos.articulo
                   ).nombre
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
                   proveedores.find(
-                    proveedor => proveedor.id === listaTotal.proveedor
+                    proveedor => proveedor.id === activosFijos.proveedor
                   ).nombre
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
-                  carteras.find(cartera => cartera.id === listaTotal.cartera)
+                  carteras.find(cartera => cartera.id === activosFijos.cartera)
                     .nombre
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
-                {marcas.find(marca => marca.id === listaTotal.marca).nombre}
+                {marcas.find(marca => marca.id === activosFijos.marca).nombre}
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
                   referencias.find(
-                    referencia => referencia.id === listaTotal.referencia
+                    referencia => referencia.id === activosFijos.referencia
                   ).nombre
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
-                {listaTotal.modelo}
+                {activosFijos.modelo}
               </TableCell>
               <TableCell component='th' scope='row'>
-                {monedas.find(moneda => moneda.id === listaTotal.moneda).tipo}
+                {monedas.find(moneda => moneda.id === activosFijos.moneda).tipo}
               </TableCell>
               <TableCell component='th' scope='row'>
-                {ivas.find(iva => iva.id === listaTotal.iva).descripcion}
+                {ivas.find(iva => iva.id === activosFijos.iva).descripcion}
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
                   ubicaciones.find(
-                    ubicacion => ubicacion.id === listaTotal.ubicacion
+                    ubicacion => ubicacion.id === activosFijos.ubicacion
                   ).lugar
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
-                {controles.find(control => control.id === listaTotal.control)
-                  ?.tipo || 'No disponible'}
+                {
+                  controles.find(control => control.id === activosFijos.control)
+                    .tipo
+                }
               </TableCell>
             </TableRow>
           ))}
