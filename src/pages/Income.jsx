@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../layout/Layout';
-import { Box, Typography } from '@mui/material';
-import TableIncome from '../components/TableIncome/TableIncome';
+import { Box, Button, Typography } from '@mui/material';
+import TableIncomeActivosFijos from '../components/TableIncome/TableIncomeActivosFijos';
+import TableIncomeConsumible from '../components/TableIncome/TableIncomeConsumibles';
 
 export const Income = () => {
+  const [activeComponent, setActiveComponent] = useState('activosFijos');
+
+  const handleButtonClick = componentName => {
+    setActiveComponent(componentName);
+  };
   return (
     <Layout>
       <Box
@@ -15,58 +21,64 @@ export const Income = () => {
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
           }}>
-          <Box
+          <Button
+            onClick={() => handleButtonClick('activosFijos')}
+            variant={
+              activeComponent === 'activosFijos' ? 'contained' : 'outlined'
+            }
             sx={{
               borderRadius: '8px',
-              backgroundColor: 'var(--primary-10)',
               padding: '20px',
               margin: '10px',
             }}>
             <Box
               sx={{
-                paddingBottom: '10px'
-              }}
-            >
+                paddingBottom: '10px',
+              }}>
               <Typography variant='h4'>Activos fijos</Typography>
             </Box>
             <Box
               sx={{
                 display: 'flex',
-                justifyContent:'space-between',
-              }}
-            >
+                justifyContent: 'space-between',
+              }}>
               <Typography>Todos los productos: </Typography>
               <Typography>Productos activos: </Typography>
               <Typography>Productos inactivos: </Typography>
             </Box>
-          </Box>
-          <Box
+          </Button>
+          <Button
+            onClick={() => handleButtonClick('consumibles')}
+            variant={
+              activeComponent === 'consumibles' ? 'contained' : 'outlined'
+            }
             sx={{
               borderRadius: '8px',
-              backgroundColor: 'var(--primary-10)',
               padding: '20px',
               margin: '10px',
             }}>
             <Box
               sx={{
-                paddingBottom: '10px'
-              }}
-            >
+                paddingBottom: '10px',
+              }}>
               <Typography variant='h4'>Consumibles</Typography>
             </Box>
             <Box
               sx={{
                 display: 'flex',
-                justifyContent:'space-between',
-              }}
-            >
+                justifyContent: 'space-between',
+              }}>
               <Typography>Todos los productos: </Typography>
               <Typography>Productos activos: </Typography>
               <Typography>Productos inactivos: </Typography>
             </Box>
-          </Box>
+          </Button>
         </Box>
-        <TableIncome />
+        {activeComponent === 'activosFijos' ? (
+          <TableIncomeActivosFijos />
+        ) : (
+          <TableIncomeConsumible />
+        )}
       </Box>
     </Layout>
   );

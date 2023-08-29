@@ -24,10 +24,13 @@ ChartJS.register(
 );
 
 export default function BarsChart() {
-  const { cantidadRiesgos, cantidadAire, cantidadAireRiesgos } =
+  const { activosFijos, carteraCounts } =
     getTotalPorRed();
 
-  const cantidad = [cantidadRiesgos, cantidadAire, cantidadAireRiesgos];
+  const cantidad = Object.values(carteraCounts);
+  console.log('ej:',Object.values(carteraCounts))
+  console.log(cantidad)
+
   const red = ['Riesgos', 'Aire', 'Aire/Riesgos'];
 
   const options = {
@@ -48,9 +51,9 @@ export default function BarsChart() {
     scales: {
       y: {
         min: 0,
-        max: 3,
+        max: 10,
         ticks: {
-          stepSize: 1,
+          stepSize: 2,
         },
       },
       x: {

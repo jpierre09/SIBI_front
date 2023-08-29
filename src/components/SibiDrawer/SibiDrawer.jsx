@@ -38,7 +38,7 @@ const options = [
   {
     label: 'Dashboard', //cards de summary de categorys
     icon: <Dashboard />,
-    url: '/',
+    url: '/home',
   },
   {
     label: 'Almacén',
