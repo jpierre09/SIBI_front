@@ -17,6 +17,7 @@ export const getActivosFijosApi = () => {
   const [referencias, setReferencias] = useState([]);
   const [ubicaciones, setUbicaciones] = useState([]);
 
+
   useEffect(() => {
     async function fetchData() {
       try {
