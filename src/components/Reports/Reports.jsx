@@ -111,7 +111,7 @@ const Reports = () => {
                         Generar reporte
                         
                     </Button>
-                    {isLoading ? <CircularProgress sx={{ ml: 2 }} /> : null}
+                    {isLoading ? <CircularProgress sx={{ ml: 4 }} /> : null}
                 </Box>
             </Box>
             <Box display="flex" flexDirection="column" alignItems="center" flexGrow={1} style={{backgroundColor: '#f0f0f0', padding: '1rem'}}>
@@ -120,7 +120,7 @@ const Reports = () => {
                             <InfoOutlinedIcon />
                         </Tooltip>
                 </Typography>
-                <Typography variant="body1" style={{marginTop: '1rem'}}>1. Las consultas generadas aquí no pueden ser mayores a 31 días.</Typography>
+                <Typography variant="body1" style={{marginTop: 'rem'}}>1. Las consultas generadas aquí no pueden ser mayores a 31 días.</Typography>
                 <Typography variant="body1">2. El reporte se descargará en formato CSV (excel).</Typography>
                 <Typography variant="body1">3. Dependiendo de los movimientos del mes, puede tardar en generar el reporte.</Typography>
             </Box>
