@@ -1,8 +1,8 @@
 import './App.css';
 import { Route, Routes, Link } from 'react-router-dom';
-import { Income } from './pages/Income';
+import { ActivosFijos } from './pages/ActivosFijos';
 import Home from './pages/Home';
-import { Outflows } from './pages/Outflows';
+import { Consumibles } from './pages/Consumibles';
 import 'chart.js';
 import LoginPage from './pages/Login';
 import Reportes  from './pages/ReportsCSV'
@@ -15,8 +15,8 @@ function App() {
     <Routes>
       <Route path="/" element={<LoginPage />} />      
       <Route path='/home' element={<Home />} />
-      <Route path='/income' element={<Income />} />
-      <Route path='/outflows' element={<Outflows />} />
+      <Route path='/activosFijos' element={<ActivosFijos />} />
+      <Route path='/consumibles' element={<Consumibles />} />
       <Route path='/report' element={<Reportes />} />
       <Route path='/tracking' element={<Tracking />} />
       <Route path='*' element={<NotFound />} />
