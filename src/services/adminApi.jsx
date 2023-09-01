@@ -17,7 +17,6 @@ export const getIngresosActivosFijosApi = () => {
   const [referencias, setReferencias] = useState([]);
   const [ubicaciones, setUbicaciones] = useState([]);
 
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -28,6 +27,108 @@ export const getIngresosActivosFijosApi = () => {
         };
         const activosFijosResponse = await axios.get(
           'http://127.0.0.1:8000/SIBI/ActivosFijos/',
+          config
+        );
+        const articulosResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/articulos/',
+          config
+        );
+        const carterasResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/cartera/',
+          config
+        );
+        const controlesResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/control/',
+          config
+        );
+        const ivasResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/iva/',
+          config
+        );
+        const marcasResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/marca/',
+          config
+        );
+        const monedasResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/moneda/',
+          config
+        );
+        const proveedoresResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/proveedor/',
+          config
+        );
+        const referenciasResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/referencia/',
+          config
+        );
+        const ubicacionesResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/ubicacion/',
+          config
+        );
+        setActivosFijos(activosFijosResponse.data);
+        setArticulos(articulosResponse.data);
+        setCarteras(carterasResponse.data);
+        setControles(controlesResponse.data);
+        setIvas(ivasResponse.data);
+        setMarcas(marcasResponse.data);
+        setMonedas(monedasResponse.data);
+        setProveedores(proveedoresResponse.data);
+        setReferencias(referenciasResponse.data);
+        setUbicaciones(ubicacionesResponse.data);
+      } catch (error) {
+        if (error.response && error.response.status === 401 && refreshToken) {
+          try {
+            const refreshResponse = await axios.post(
+              'http://127.0.0.1:8000/api/token/refresh/',
+              {
+                refresh: refreshToken,
+              }
+            );
+          } catch (refreshError) {
+            console.log('Error al refrescar el token: ', refreshError);
+          }
+        } else {
+          console.log('Error al obtener el token: ', error);
+        }
+      }
+    }
+    fetchData();
+  }, [accessToken, refreshToken]);
+
+  return {
+    activosFijos,
+    articulos,
+    carteras,
+    controles,
+    ivas,
+    marcas,
+    monedas,
+    proveedores,
+    referencias,
+    ubicaciones,
+  };
+};export const getEgresosActivosFijosApi = () => {
+  const [activosFijos, setActivosFijos] = useState([]);
+  const [articulos, setArticulos] = useState([]);
+  const [carteras, setCarteras] = useState([]);
+  const [controles, setControles] = useState([]);
+  const [ivas, setIvas] = useState([]);
+  const [marcas, setMarcas] = useState([]);
+  const [monedas, setMonedas] = useState([]);
+  const [proveedores, setProveedores] = useState([]);
+  const [referencias, setReferencias] = useState([]);
+  const [ubicaciones, setUbicaciones] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        };
+        const activosFijosResponse = await axios.get(
+          'http://127.0.0.1:8000/SIBI/ActivosFijos/egresados',
           config
         );
         const articulosResponse = await axios.get(

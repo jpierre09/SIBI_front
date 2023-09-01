@@ -11,7 +11,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { getIngresosActivosFijosApi } from '../../services/adminApi';
+import { getEgresosActivosFijosApi } from '../../services/adminApi';
 
 const styleTableCell = {
   fontWeight: 'bold',
@@ -29,7 +29,7 @@ export default function TableEgresosActivosFijos() {
     proveedores,
     referencias,
     ubicaciones,
-  } = getIngresosActivosFijosApi();
+  } = getEgresosActivosFijosApi();
 
   return (
     <Box>
