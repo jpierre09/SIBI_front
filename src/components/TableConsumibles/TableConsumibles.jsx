@@ -8,27 +8,25 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from '@mui/material';
-import { getActivosFijosApi } from '../../services/adminApi';
+import { getConsumiblesApi } from '../../services/adminApi';
 
 const styleTableCell = {
   fontWeight: 'bold',
 };
 
-export default function TableIncomeActivosFijos() {
+export default function TableConsumibles() {
   const {
-    activosFijos,
+    consumibles,
     articulos,
     carteras,
-    controles,
     ivas,
     marcas,
     monedas,
     proveedores,
     referencias,
     ubicaciones,
-  } = getActivosFijosApi();
+  } = getConsumiblesApi();
 
   return (
     <TableContainer component={Paper} sx={{ width: '89vw', margin: '1vh' }}>
@@ -65,67 +63,58 @@ export default function TableIncomeActivosFijos() {
             <TableCell align='center' sx={styleTableCell}>
               UBICACION
             </TableCell>
-            <TableCell align='center' sx={styleTableCell}>
-              CONTROL/LEGALIZABLE
-            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {activosFijos.map(activosFijos => (
-            <TableRow key={activosFijos.id}>
+          {consumibles.map(consumibles => (
+            <TableRow key={consumibles.id}>
               <TableCell component='th' scope='row'>
-                {activosFijos.id}
+                {consumibles.id}
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
                   articulos.find(
-                    articulo => articulo.id === activosFijos.articulo
+                    articulo => articulo.id === consumibles.articulo
                   ).nombre
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
                   proveedores.find(
-                    proveedor => proveedor.id === activosFijos.proveedor
+                    proveedor => proveedor.id === consumibles.proveedor
                   ).nombre
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
-                  carteras.find(cartera => cartera.id === activosFijos.cartera)
+                  carteras.find(cartera => cartera.id === consumibles.cartera)
                     .nombre
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
-                {marcas.find(marca => marca.id === activosFijos.marca).nombre}
+                {marcas.find(marca => marca.id === consumibles.marca).nombre}
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
                   referencias.find(
-                    referencia => referencia.id === activosFijos.referencia
+                    referencia => referencia.id === consumibles.referencia
                   ).nombre
                 }
               </TableCell>
               <TableCell component='th' scope='row'>
-                {activosFijos.modelo}
+                {consumibles.modelo}
               </TableCell>
               <TableCell component='th' scope='row'>
-                {monedas.find(moneda => moneda.id === activosFijos.moneda).tipo}
+                {monedas.find(moneda => moneda.id === consumibles.moneda).tipo}
               </TableCell>
               <TableCell component='th' scope='row'>
-                {ivas.find(iva => iva.id === activosFijos.iva).descripcion}
+                {ivas.find(iva => iva.id === consumibles.iva).descripcion}
               </TableCell>
               <TableCell component='th' scope='row'>
                 {
                   ubicaciones.find(
-                    ubicacion => ubicacion.id === activosFijos.ubicacion
+                    ubicacion => ubicacion.id === consumibles.ubicacion
                   ).lugar
-                }
-              </TableCell>
-              <TableCell component='th' scope='row'>
-                {
-                  controles.find(control => control.id === activosFijos.control)
-                    .tipo
                 }
               </TableCell>
             </TableRow>

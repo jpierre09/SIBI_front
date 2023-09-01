@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Layout from '../layout/Layout';
 import { Box, Button, Typography } from '@mui/material';
-import TableIncomeActivosFijos from '../components/TableIncome/TableIncomeActivosFijos';
-import TableIncomeConsumible from '../components/TableIncome/TableIncomeConsumibles';
+import TableIngresosActivosFijos from '../components/TableActivosFijos/TableIngresosActivosFijos';
+import TableEgresosActivosFijos from '../components/TableActivosFijos/TableEgresosActivosFijos';
 import OutflowsModal from './OutflowsModal.jsx';
 import OutflowsModalConsumible from './OutflowsModalconsumible';
 
@@ -67,7 +67,6 @@ export const ActivosFijos = () => {
           </Button>
         </Box>
         {activeComponent === 'ingresos' ? (
-          
           <Box
             sx={{
               display: 'flex',
@@ -75,9 +74,10 @@ export const ActivosFijos = () => {
               marginBottom: '20px',
               padding: '0 0 0 1vw',
             }}>
-            <Box 
-              sx={{ 
-                display: 'flex', gap: '16px'
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '16px',
               }}>
               <Button
                 variant='contained'
@@ -101,9 +101,10 @@ export const ActivosFijos = () => {
               marginBottom: '20px',
               padding: '0 0 0 1vw',
             }}>
-            <Box 
-              sx={{ 
-                display: 'flex', gap: '16px'
+            <Box
+              sx={{
+                display: 'flex',
+                gap: '16px',
               }}>
               <Button
                 variant='contained'
@@ -121,18 +122,18 @@ export const ActivosFijos = () => {
           </Box>
         )}
         {activeComponent === 'ingresos' ? (
-          <TableIncomeActivosFijos />
+          <TableIngresosActivosFijos />
         ) : (
-          <TableIncomeConsumible />
+          <TableEgresosActivosFijos />
         )}
       </Box>
-        {/* Modal */}
-        <OutflowsModal open={modalOpen} onClose={() => setModalOpen(false)} />
-        {/* Modal de consumibles */}
-        <OutflowsModalConsumible
-          open={modalConsumibleOpen}
-          onClose={() => setModalConsumibleOpen(false)}
-        />
+      {/* Modal */}
+      <OutflowsModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      {/* Modal de consumibles */}
+      <OutflowsModalConsumible
+        open={modalConsumibleOpen}
+        onClose={() => setModalConsumibleOpen(false)}
+      />
     </Layout>
   );
 };

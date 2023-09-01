@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Layout from '../layout/Layout';
-import { Box, Typography, Button } from '@mui/material';
-import TableOutflows from '../components/TableOutflows/TableOutflows';
+import { Box, Button } from '@mui/material';
+import TableConsumibles from '../components/TableConsumibles/TableConsumibles';
+import OutflowsModalConsumible from './OutflowsModalconsumible';
 
 export const Consumibles = () => {
+  const [modalConsumibleOpen, setModalConsumibleOpen] = useState(false);
 
   return (
     <Layout>
@@ -30,8 +32,39 @@ export const Consumibles = () => {
             </Box>
           </Box>
         </Box> */}
-        <TableOutflows />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '20px',
+            padding: '0 0 0 1vw',
+          }}>
+          <Box
+            sx={{
+              display: 'flex',
+              gap: '16px',
+            }}>
+            <Button
+              variant='contained'
+              color='primary'
+              sx={{
+                backgroundColor: '#184287',
+                '&:hover': { backgroundColor: '#133466' },
+                borderRadius: '13px',
+              }}
+              onClick={() => setModalConsumibleOpen(true)} // Abre el modal de consumibles al hacer clic
+            >
+              + egreso consumibles
+            </Button>
+          </Box>
+        </Box>
+        <TableConsumibles />
       </Box>
+      {/* Modal de consumibles */}
+      <OutflowsModalConsumible
+        open={modalConsumibleOpen}
+        onClose={() => setModalConsumibleOpen(false)}
+      />
     </Layout>
   );
 };

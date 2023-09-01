@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
-  Button,
   Paper,
   Table,
   TableBody,
@@ -18,8 +17,7 @@ const styleTableCell = {
   fontWeight: 'bold',
 };
 
-export default function DataTable() {
-  const [searchTerm, setSearchTerm] = useState('');
+export default function TableEgresosActivosFijos() {
   const {
     activosFijos,
     articulos,
@@ -33,35 +31,8 @@ export default function DataTable() {
     ubicaciones,
   } = getActivosFijosApi();
 
-  const filteredActivosFijos = activosFijos.filter(activoFijo => {
-    if (!searchTerm) {
-      return true; // Mostrar todas las filas si no hay término de búsqueda
-    }
-
-    const matchingArticulo = articulos.find(
-      articulo => articulo.id === activoFijo.articulo
-    );
-    const matchingMarca = marcas.find(marca => marca.id === activoFijo.marca);
-    const matchingReferencia = referencias.find(
-      referencia => referencia.id === activoFijo.referencia
-    );
-
-    if (
-      matchingArticulo.nombre.includes(searchTerm) ||
-      matchingMarca.nombre.includes(searchTerm) ||
-      matchingReferencia.nombre.includes(searchTerm)
-    ) {
-      return true; // Mostrar la fila si hay una coincidencia en el término de búsqueda
-    }
-
-    return false; // Ocultar la fila si no hay coincidencias
-  });
-
   return (
-    <Box
-      sx={{
-        margin: '10px',
-      }}>
+    <Box>
       <Box
         sx={{
           display: 'flex',
@@ -74,7 +45,7 @@ export default function DataTable() {
           variant='outlined'
           size='small'
           label='Buscar'
-          value={searchTerm}
+          // value={searchTerm}
           onChange={e => setSearchTerm(e.target.value)}
         />
       </Box>
@@ -84,9 +55,6 @@ export default function DataTable() {
             <TableRow>
               <TableCell align='center' sx={styleTableCell}>
                 ID
-              </TableCell>
-              <TableCell align='center' sx={styleTableCell}>
-                TIPO DE BIEN
               </TableCell>
               <TableCell align='center' sx={styleTableCell}>
                 ARTICULO
@@ -121,13 +89,10 @@ export default function DataTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredActivosFijos.map(activosFijos => (
+            {activosFijos.map(activosFijos => (
               <TableRow key={activosFijos.id}>
                 <TableCell component='th' scope='row'>
                   {activosFijos.id}
-                </TableCell>
-                <TableCell component='th' scope='row'>
-                  {activosFijos.tipo_activo}
                 </TableCell>
                 <TableCell component='th' scope='row'>
                   {
@@ -145,8 +110,9 @@ export default function DataTable() {
                 </TableCell>
                 <TableCell component='th' scope='row'>
                   {
-                    carteras.find(cartera => cartera.id === activosFijos.cartera)
-                      .nombre
+                    carteras.find(
+                      cartera => cartera.id === activosFijos.cartera
+                    ).nombre
                   }
                 </TableCell>
                 <TableCell component='th' scope='row'>
@@ -163,7 +129,10 @@ export default function DataTable() {
                   {activosFijos.modelo}
                 </TableCell>
                 <TableCell component='th' scope='row'>
-                  {monedas.find(moneda => moneda.id === activosFijos.moneda).tipo}
+                  {
+                    monedas.find(moneda => moneda.id === activosFijos.moneda)
+                      .tipo
+                  }
                 </TableCell>
                 <TableCell component='th' scope='row'>
                   {ivas.find(iva => iva.id === activosFijos.iva).descripcion}
@@ -176,8 +145,11 @@ export default function DataTable() {
                   }
                 </TableCell>
                 <TableCell component='th' scope='row'>
-                  {controles.find(control => control.id === activosFijos.control)
-                    ?.tipo || 'No disponible'}
+                  {
+                    controles.find(
+                      control => control.id === activosFijos.control
+                    ).tipo
+                  }
                 </TableCell>
               </TableRow>
             ))}
