@@ -5,7 +5,7 @@ import { getAccessToken, getRefreshToken } from './loginApi';
 const accessToken = getAccessToken();
 const refreshToken = getRefreshToken();
 
-export const getActivosFijosApi = () => {
+export const getIngresosActivosFijosApi = () => {
   const [activosFijos, setActivosFijos] = useState([]);
   const [articulos, setArticulos] = useState([]);
   const [carteras, setCarteras] = useState([]);
