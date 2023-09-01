@@ -24,13 +24,9 @@ ChartJS.register(
 );
 
 export default function BarsChart() {
-  const { activosFijos, carteraCounts } =
-    getTotalPorRed();
+  const { activosFijos, carteraCounts } = getTotalPorRed();
 
   const cantidad = Object.values(carteraCounts);
-  console.log('ej:',Object.values(carteraCounts))
-  console.log(cantidad)
-
   const red = ['Riesgos', 'Aire', 'Aire/Riesgos'];
 
   const options = {
@@ -45,7 +41,7 @@ export default function BarsChart() {
         text: 'Cantidad de Activos fijos por cartera',
         font: {
           size: 20,
-        }
+        },
       },
     },
     scales: {
