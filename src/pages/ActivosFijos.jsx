@@ -3,9 +3,13 @@ import Layout from '../layout/Layout';
 import { Box, Button, Typography } from '@mui/material';
 import TableIncomeActivosFijos from '../components/TableIncome/TableIncomeActivosFijos';
 import TableIncomeConsumible from '../components/TableIncome/TableIncomeConsumibles';
+import OutflowsModal from './OutflowsModal.jsx';
+import OutflowsModalConsumible from './OutflowsModalconsumible';
 
 export const ActivosFijos = () => {
   const [activeComponent, setActiveComponent] = useState('ingresos');
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalConsumibleOpen, setModalConsumibleOpen] = useState(false);
 
   const handleButtonClick = componentName => {
     setActiveComponent(componentName);
@@ -122,6 +126,13 @@ export const ActivosFijos = () => {
           <TableIncomeConsumible />
         )}
       </Box>
+        {/* Modal */}
+        <OutflowsModal open={modalOpen} onClose={() => setModalOpen(false)} />
+        {/* Modal de consumibles */}
+        <OutflowsModalConsumible
+          open={modalConsumibleOpen}
+          onClose={() => setModalConsumibleOpen(false)}
+        />
     </Layout>
   );
 };
