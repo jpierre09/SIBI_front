@@ -27,6 +27,8 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import {
   AssessmentOutlined,
   Dashboard,
+  Inventory,
+  NoteAlt,
   Settings,
 } from '@mui/icons-material';
 import AvatarMenu from '../../pages/AvatarMenu';  
@@ -45,14 +47,14 @@ const options = [
     icon: <StorageIcon />,
     subMenu: [
       {
-        item: 'Ingresos', //primero, fijos y consumibles***
-        url: '/income',
-        icon: <ArrowDownwardIcon />,  
+        item: 'Activos fijos',
+        url: '/activosFijos',
+        icon: <Inventory />,  
       },
       {
-        item: 'Egresos',
-        url: '/outflows',
-        icon: <ArrowUpwardIcon />,
+        item: 'Consumibles',
+        url: '/consumibles',
+        icon: <NoteAlt />,
       },
     ],
   },
