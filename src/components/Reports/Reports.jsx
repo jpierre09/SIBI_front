@@ -3,6 +3,8 @@ import { Button, Box, TextField, Typography, RadioGroup, FormControlLabel, Radio
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { CircularProgress } from '@mui/material';
 
+import { getAccessToken } from '../../services/loginApi';
+
 
 const Reports = () => {
     const [startDate, setStartDate] = useState('');
@@ -26,32 +28,75 @@ const Reports = () => {
         }
     }, [startDate, endDate]);
 
-    const handleGenerateReport = async () => {
-        if (!startDate || !endDate) {
-            alert('Ambas fechas son obligatorias.');
-            return;
-        }
+
+
+const handleGenerateReport = async () => {
+    if (!startDate || !endDate) {
+        alert('Ambas fechas son obligatorias.');
+        return;
+    }
+    
+    if (validDateRange) {
+        setIsLoading(true);  
+
+        let token = getAccessToken(); 
         
-        if (validDateRange) {
-            setIsLoading(true);  // Inicia la carga
-    
-            let url;
-            if (reportType === 'ingresos') {
-                url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
-            } else if (reportType === 'egresos') {
-                url = `http://127.0.0.1:8000/SIBI/downloadcsv_report_egresos/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
-            }
-    
-            // Genera un retreso de 4 segundos antes de lanzar la consulta 
-            await new Promise(resolve => setTimeout(resolve, 4000));  
-            
-            window.open(url, '_blank');
-    
-            setIsLoading(false);  
-        } else {
-            alert('El rango de fechas no puede ser mayor a un mes.');
+        // Si no hay token, alerta al usuario y detén la ejecución
+        if (!token) {
+            alert('No tienes un token válido. Por favor, inicia sesión de nuevo.');
+            setIsLoading(false);
+            return; 
         }
-    };
+
+        let baseURL;
+        if (reportType === 'ingresos') {
+            baseURL = 'http://127.0.0.1:8000/SIBI/downloadcsv_report/';
+        } else if (reportType === 'egresos') {
+            baseURL = 'http://127.0.0.1:8000/SIBI/downloadcsv_report_egresos/';
+        }
+
+        const url = `${baseURL}?fecha_inicio=${startDate}&fecha_fin=${endDate}&token=${token}`;
+    
+        // Genera un retardo de 4 segundos antes de lanzar la consulta 
+        await new Promise(resolve => setTimeout(resolve, 4000));  
+    
+        window.open(url, '_blank');
+    
+        setIsLoading(false);  
+    } else {
+        alert('El rango de fechas no puede ser mayor a un mes.');
+    }
+};
+
+    
+    
+
+    // const handleGenerateReport = async () => {
+    //     if (!startDate || !endDate) {
+    //         alert('Ambas fechas son obligatorias.');
+    //         return;
+    //     }
+        
+    //     if (validDateRange) {
+    //         setIsLoading(true);  // Inicia la carga
+    
+    //         let url;
+    //         if (reportType === 'ingresos') {
+    //             url = `http://127.0.0.1:8000/SIBI/downloadcsv_report/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
+    //         } else if (reportType === 'egresos') {
+    //             url = `http://127.0.0.1:8000/SIBI/downloadcsv_report_egresos/?fecha_inicio=${startDate}&fecha_fin=${endDate}`;
+    //         }
+    
+    //         // Genera un retreso de 4 segundos antes de lanzar la consulta 
+    //         await new Promise(resolve => setTimeout(resolve, 4000));  
+            
+    //         window.open(url, '_blank');
+    
+    //         setIsLoading(false);  
+    //     } else {
+    //         alert('El rango de fechas no puede ser mayor a un mes.');
+    //     }
+    // };
     
 
     return (
