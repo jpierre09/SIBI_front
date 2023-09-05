@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { getAccessToken, getRefreshToken } from './loginApi';
+import { getAccessToken, getRefreshToken, saveAccessToken } from './loginApi';
 
-const accessToken = getAccessToken();
-const refreshToken = getRefreshToken();
+// const accessToken = getAccessToken();
+// const refreshToken = getRefreshToken();
+let accessToken = getAccessToken();
+let refreshToken = getRefreshToken();
 
 export const getIngresosActivosFijosApi = () => {
   const [activosFijos, setActivosFijos] = useState([]);
@@ -107,7 +109,10 @@ export const getIngresosActivosFijosApi = () => {
     referencias,
     ubicaciones,
   };
-};export const getEgresosActivosFijosApi = () => {
+};
+
+
+export const getEgresosActivosFijosApi = () => {
   const [activosFijos, setActivosFijos] = useState([]);
   const [articulos, setArticulos] = useState([]);
   const [carteras, setCarteras] = useState([]);

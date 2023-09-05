@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export const handleLogin = async (username, password, setLoginError) => {
@@ -34,4 +33,8 @@ export const getAccessToken = () => {
 
 export const getRefreshToken = () => {
   return localStorage.getItem('refresh_token');
+};
+
+export const saveAccessToken = (newAccessToken) => {
+  localStorage.setItem('access_token', newAccessToken);
 };
