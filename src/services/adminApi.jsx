@@ -86,6 +86,16 @@ export const getIngresosActivosFijosApi = () => {
                 refresh: refreshToken,
               }
             );
+            if (refreshResponse.data && refreshResponse.data.access) {
+              // Guarda el nuevo token de acceso
+              saveAccessToken(refreshResponse.data.access);
+              // Actualiza la variable local accessToken con el nuevo valor
+              accessToken = refreshResponse.data.access;
+              // Vuelve a intentar la llamada a la API
+              fetchData();
+            }
+
+
           } catch (refreshError) {
             console.log('Error al refrescar el token: ', refreshError);
           }
