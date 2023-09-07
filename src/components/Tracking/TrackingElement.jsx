@@ -46,6 +46,17 @@ const Tracking = () => {
                 />
             </Box>
 
+            <Box display="flex" justifyContent="flex-start" width="100%">
+                <Button 
+                    variant="contained" 
+                    color="primary"
+                    onClick={handleSearch}
+                    sx={{ mt: 4 }}
+                >
+                    Buscar
+                </Button>
+            </Box>
+
             {notFound && (
                 <Typography variant="body2" color="error" sx={{ mt: 2 }}>
                     No se encontró el bien.
@@ -93,16 +104,7 @@ const Tracking = () => {
                 </Table>
             )}
 
-            <Box display="flex" justifyContent="flex-start" width="100%">
-                <Button 
-                    variant="contained" 
-                    color="primary"
-                    onClick={handleSearch}
-                    sx={{ mt: 4 }}
-                >
-                    Buscar
-                </Button>
-            </Box>
+            
         </Box>
     );
 };
