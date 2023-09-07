@@ -35,27 +35,37 @@ const Tracking = () => {
                 Tracking de evento
             </Typography>
 
-            <Box display="flex" alignItems="center" sx={{ width: '100%', justifyContent: 'flex-start' }}>
-                <TextField
-                    label="AMVA / serial"
-                    variant="outlined"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    required
-                    sx={{ width: 'calc(10%)' }}
-                />
-            </Box>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSearch();
+                }}
+                style={{ width: '100%' }}
+            >
+                <Box display="flex" alignItems="center" sx={{ width: '100%', justifyContent: 'flex-start' }}>
+                    <TextField
+                        label="AMVA / serial"
+                        variant="outlined"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        required
+                        sx={{ width: 'calc(10%)' }}
+                    />
+                </Box>
 
-            <Box display="flex" justifyContent="flex-start" width="100%">
-                <Button 
-                    variant="contained" 
-                    color="primary"
-                    onClick={handleSearch}
-                    sx={{ mt: 4 }}
-                >
-                    Buscar
-                </Button>
-            </Box>
+                <Box display="flex" justifyContent="flex-start" width="100%">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        sx={{ mt: 4 }}
+                    >
+                        Buscar
+                    </Button>
+                </Box>
+            </form>
+
+
 
             {notFound && (
                 <Typography variant="body2" color="error" sx={{ mt: 2 }}>
