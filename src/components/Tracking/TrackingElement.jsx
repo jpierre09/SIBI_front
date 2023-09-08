@@ -29,6 +29,12 @@ const Tracking = () => {
         }
     };
 
+    const eliminarConsulta = (id) => {
+        // Filtrar las consultas para eliminar la que coincide con el ID
+        const nuevasConsultas = results.filter(consulta => consulta.id !== id);
+        setResults(nuevasConsultas);
+    };
+
     return (
         <Box display="flex" flexDirection="column" alignItems="center">
             <Typography variant="h6" sx={{ marginBottom: '8px', textAlign: 'left', width: '100%' }}>
@@ -65,8 +71,6 @@ const Tracking = () => {
                 </Box>
             </form>
 
-
-
             {notFound && (
                 <Typography variant="body2" color="error" sx={{ mt: 2 }}>
                     No se encontró el bien.
@@ -89,7 +93,7 @@ const Tracking = () => {
                             <TableCell>Longitud</TableCell>
                             <TableCell>Descripcion</TableCell>
                             <TableCell>Dependencia</TableCell>
-                            
+                            <TableCell>Acciones</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -107,19 +111,20 @@ const Tracking = () => {
                                 <TableCell>{row.longitud}</TableCell>
                                 <TableCell>{row.descripcion}</TableCell>
                                 <TableCell>{row.dependencia}</TableCell>
-                                
+                                <TableCell>
+                                    <Button variant="contained" color="secondary" onClick={() => eliminarConsulta(row.id)}>Eliminar</Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             )}
-
-            
         </Box>
     );
 };
 
 export default Tracking;
+
 
 
 
